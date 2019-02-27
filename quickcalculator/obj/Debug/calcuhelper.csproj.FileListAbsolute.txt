@@ -1,0 +1,10 @@
+C:\Users\Daphne\source\repos\calcuhelper\calcuhelper\bin\Debug\calcuhelper.exe.config
+C:\Users\Daphne\source\repos\calcuhelper\calcuhelper\bin\Debug\calcuhelper.exe
+C:\Users\Daphne\source\repos\calcuhelper\calcuhelper\bin\Debug\calcuhelper.pdb
+C:\Users\Daphne\source\repos\calcuhelper\calcuhelper\obj\Debug\calcuhelper.csprojAssemblyReference.cache
+C:\Users\Daphne\source\repos\calcuhelper\calcuhelper\obj\Debug\calcuhelper.Form1.resources
+C:\Users\Daphne\source\repos\calcuhelper\calcuhelper\obj\Debug\calcuhelper.Properties.Resources.resources
+C:\Users\Daphne\source\repos\calcuhelper\calcuhelper\obj\Debug\calcuhelper.csproj.GenerateResource.cache
+C:\Users\Daphne\source\repos\calcuhelper\calcuhelper\obj\Debug\calcuhelper.csproj.CoreCompileInputs.cache
+C:\Users\Daphne\source\repos\calcuhelper\calcuhelper\obj\Debug\calcuhelper.exe
+C:\Users\Daphne\source\repos\calcuhelper\calcuhelper\obj\Debug\calcuhelper.pdb
