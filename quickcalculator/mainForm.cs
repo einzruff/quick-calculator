@@ -10,8 +10,8 @@ using System.Windows.Forms;
 
 /* Quick Calculator
  * by Daphne Lundquist
- * 1/31/2019
- * v 1.0
+ * 3/9/2019
+ * v 1.01
  */
 
 namespace quickcalculator
@@ -83,7 +83,9 @@ namespace quickcalculator
             }
             else
             {
-                //txtResult.Text = "";
+                lblInfo.Text = "...";
+                lblInfo.ForeColor = Color.Black;
+                timer1.Enabled = false;
             }
         }
 

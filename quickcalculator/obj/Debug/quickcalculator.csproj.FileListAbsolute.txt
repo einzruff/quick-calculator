@@ -26,3 +26,13 @@ C:\Users\Jared\Desktop\Workspace\2019-2-26-quickcalculator\quickcalculator\quick
 C:\Users\Jared\Desktop\Workspace\2019-2-26-quickcalculator\quickcalculator\quickcalculator\obj\Debug\quickcalculator.csproj.CoreCompileInputs.cache
 C:\Users\Jared\Desktop\Workspace\2019-2-26-quickcalculator\quickcalculator\quickcalculator\obj\Debug\quickcalculator.exe
 C:\Users\Jared\Desktop\Workspace\2019-2-26-quickcalculator\quickcalculator\quickcalculator\obj\Debug\quickcalculator.pdb
+C:\files\gitfilez\quick-calc\quick-calculator\quickcalculator\bin\Debug\quickcalculator.exe.config
+C:\files\gitfilez\quick-calc\quick-calculator\quickcalculator\bin\Debug\quickcalculator.exe
+C:\files\gitfilez\quick-calc\quick-calculator\quickcalculator\bin\Debug\quickcalculator.pdb
+C:\files\gitfilez\quick-calc\quick-calculator\quickcalculator\obj\Debug\quickcalculator.csprojAssemblyReference.cache
+C:\files\gitfilez\quick-calc\quick-calculator\quickcalculator\obj\Debug\quickcalculator.mainForm.resources
+C:\files\gitfilez\quick-calc\quick-calculator\quickcalculator\obj\Debug\quickcalculator.Properties.Resources.resources
+C:\files\gitfilez\quick-calc\quick-calculator\quickcalculator\obj\Debug\quickcalculator.csproj.GenerateResource.cache
+C:\files\gitfilez\quick-calc\quick-calculator\quickcalculator\obj\Debug\quickcalculator.csproj.CoreCompileInputs.cache
+C:\files\gitfilez\quick-calc\quick-calculator\quickcalculator\obj\Debug\quickcalculator.exe
+C:\files\gitfilez\quick-calc\quick-calculator\quickcalculator\obj\Debug\quickcalculator.pdb
