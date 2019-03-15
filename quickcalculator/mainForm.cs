@@ -10,8 +10,8 @@ using System.Windows.Forms;
 
 /* Quick Calculator
  * by Daphne Lundquist
- * 3/9/2019
- * v 1.01
+ * 3/14/2019   3.14159265359
+ * v 1.02
  */
 
 namespace quickcalculator
@@ -123,6 +123,8 @@ namespace quickcalculator
             cboConversionType.SelectedIndex = 0;
             rbOperatorMult.Select();
             this.ActiveControl = txtLeftVal;
+
+            timer2.Enabled = true;
         }
 
         public Boolean IsNumber(String value)
@@ -273,6 +275,55 @@ namespace quickcalculator
                     break;
             }
             return returnNum;
+        }
+
+        //caret fade
+        int cOp = 255;
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            CustomTextBox currentTxt = txtLeftVal;
+            if(txtLeftVal.Focused)
+            {
+                currentTxt = txtLeftVal;
+            }
+            if(txtRightVal.Focused)
+            {
+                currentTxt = txtRightVal;
+            }
+            if(txtResult.Focused)
+            {
+                currentTxt = txtResult;
+            }
+            if(cOp<0) { cOp = 255; }
+            cOp = cOp - 40;
+            currentTxt.updateCaretOpacity(cOp);
+        }
+
+        private void chkCaretFade_CheckedChanged(object sender, EventArgs e)
+        {
+            if(chkCaretFade.Checked)
+            {
+                timer2.Enabled = true;
+            }
+            else
+            {
+                //turn off fade and set back to full op
+                timer2.Enabled = false;
+                CustomTextBox currentTxt = txtLeftVal;
+                if (txtLeftVal.Focused)
+                {
+                    currentTxt = txtLeftVal;
+                }
+                if (txtRightVal.Focused)
+                {
+                    currentTxt = txtRightVal;
+                }
+                if (txtResult.Focused)
+                {
+                    currentTxt = txtResult;
+                }
+                currentTxt.updateCaretOpacity(255);
+            }
         }
     }
 }

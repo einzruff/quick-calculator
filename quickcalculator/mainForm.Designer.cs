@@ -29,11 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.txtLeftVal = new System.Windows.Forms.TextBox();
-            this.txtResult = new System.Windows.Forms.TextBox();
             this.cboCopyResult = new System.Windows.Forms.CheckBox();
             this.cboClearLeft = new System.Windows.Forms.CheckBox();
-            this.txtRightVal = new System.Windows.Forms.TextBox();
             this.rbOperatorMult = new System.Windows.Forms.RadioButton();
             this.rbOperatorPlus = new System.Windows.Forms.RadioButton();
             this.rbOperatorSub = new System.Windows.Forms.RadioButton();
@@ -51,38 +48,24 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.txtLeftConv = new System.Windows.Forms.TextBox();
-            this.txtRightConv = new System.Windows.Forms.TextBox();
-            this.cboLeftConvOp = new System.Windows.Forms.ComboBox();
-            this.cboRightConvOp = new System.Windows.Forms.ComboBox();
             this.cboConversionType = new System.Windows.Forms.ComboBox();
+            this.cboLeftConvOp = new System.Windows.Forms.ComboBox();
             this.lblConvEquals = new System.Windows.Forms.Label();
+            this.cboRightConvOp = new System.Windows.Forms.ComboBox();
+            this.txtRightConv = new System.Windows.Forms.TextBox();
+            this.txtLeftConv = new System.Windows.Forms.TextBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtResult = new quickcalculator.CustomTextBox();
+            this.txtRightVal = new quickcalculator.CustomTextBox();
+            this.txtLeftVal = new quickcalculator.CustomTextBox();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.chkCaretFade = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // txtLeftVal
-            // 
-            this.txtLeftVal.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLeftVal.Location = new System.Drawing.Point(24, 6);
-            this.txtLeftVal.Name = "txtLeftVal";
-            this.txtLeftVal.Size = new System.Drawing.Size(148, 33);
-            this.txtLeftVal.TabIndex = 0;
-            this.txtLeftVal.TextChanged += new System.EventHandler(this.txtLeftVal_TextChanged);
-            this.txtLeftVal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLeftVal_KeyPress);
-            // 
-            // txtResult
-            // 
-            this.txtResult.BackColor = System.Drawing.Color.CadetBlue;
-            this.txtResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtResult.ForeColor = System.Drawing.Color.White;
-            this.txtResult.Location = new System.Drawing.Point(219, 47);
-            this.txtResult.Name = "txtResult";
-            this.txtResult.ReadOnly = true;
-            this.txtResult.Size = new System.Drawing.Size(148, 33);
-            this.txtResult.TabIndex = 2;
             // 
             // cboCopyResult
             // 
@@ -107,17 +90,6 @@
             this.cboClearLeft.TabIndex = 8;
             this.cboClearLeft.Text = "Clear left value";
             this.cboClearLeft.UseVisualStyleBackColor = true;
-            // 
-            // txtRightVal
-            // 
-            this.txtRightVal.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRightVal.Location = new System.Drawing.Point(219, 6);
-            this.txtRightVal.MaxLength = 42;
-            this.txtRightVal.Name = "txtRightVal";
-            this.txtRightVal.Size = new System.Drawing.Size(148, 33);
-            this.txtRightVal.TabIndex = 1;
-            this.txtRightVal.Text = "1.00";
-            this.txtRightVal.TextChanged += new System.EventHandler(this.txtRightVal_TextChanged);
             // 
             // rbOperatorMult
             // 
@@ -289,11 +261,12 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.LightGray;
+            this.tabPage1.Controls.Add(this.chkCaretFade);
+            this.tabPage1.Controls.Add(this.txtResult);
+            this.tabPage1.Controls.Add(this.txtRightVal);
             this.tabPage1.Controls.Add(this.txtLeftVal);
             this.tabPage1.Controls.Add(this.lblInfo);
-            this.tabPage1.Controls.Add(this.txtResult);
             this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.txtRightVal);
             this.tabPage1.Controls.Add(this.btnCopyResult);
             this.tabPage1.Controls.Add(this.rbOperatorMult);
             this.tabPage1.Controls.Add(this.btnCopyRightVal);
@@ -327,22 +300,15 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Converter";
             // 
-            // txtLeftConv
+            // cboConversionType
             // 
-            this.txtLeftConv.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLeftConv.Location = new System.Drawing.Point(6, 31);
-            this.txtLeftConv.Name = "txtLeftConv";
-            this.txtLeftConv.Size = new System.Drawing.Size(118, 33);
-            this.txtLeftConv.TabIndex = 23;
-            this.txtLeftConv.TextChanged += new System.EventHandler(this.txtLeftConv_TextChanged);
-            // 
-            // txtRightConv
-            // 
-            this.txtRightConv.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRightConv.Location = new System.Drawing.Point(210, 31);
-            this.txtRightConv.Name = "txtRightConv";
-            this.txtRightConv.Size = new System.Drawing.Size(132, 33);
-            this.txtRightConv.TabIndex = 23;
+            this.cboConversionType.FormattingEnabled = true;
+            this.cboConversionType.Items.AddRange(new object[] {
+            "Length"});
+            this.cboConversionType.Location = new System.Drawing.Point(6, 5);
+            this.cboConversionType.Name = "cboConversionType";
+            this.cboConversionType.Size = new System.Drawing.Size(144, 21);
+            this.cboConversionType.TabIndex = 23;
             // 
             // cboLeftConvOp
             // 
@@ -379,6 +345,16 @@
             this.cboLeftConvOp.Size = new System.Drawing.Size(62, 33);
             this.cboLeftConvOp.TabIndex = 23;
             // 
+            // lblConvEquals
+            // 
+            this.lblConvEquals.AutoSize = true;
+            this.lblConvEquals.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConvEquals.Location = new System.Drawing.Point(186, 35);
+            this.lblConvEquals.Name = "lblConvEquals";
+            this.lblConvEquals.Size = new System.Drawing.Size(24, 25);
+            this.lblConvEquals.TabIndex = 24;
+            this.lblConvEquals.Text = "=";
+            // 
             // cboRightConvOp
             // 
             this.cboRightConvOp.BackColor = System.Drawing.Color.Gainsboro;
@@ -414,25 +390,73 @@
             this.cboRightConvOp.Size = new System.Drawing.Size(69, 33);
             this.cboRightConvOp.TabIndex = 23;
             // 
-            // cboConversionType
+            // txtRightConv
             // 
-            this.cboConversionType.FormattingEnabled = true;
-            this.cboConversionType.Items.AddRange(new object[] {
-            "Length"});
-            this.cboConversionType.Location = new System.Drawing.Point(6, 5);
-            this.cboConversionType.Name = "cboConversionType";
-            this.cboConversionType.Size = new System.Drawing.Size(144, 21);
-            this.cboConversionType.TabIndex = 23;
+            this.txtRightConv.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRightConv.Location = new System.Drawing.Point(210, 31);
+            this.txtRightConv.Name = "txtRightConv";
+            this.txtRightConv.Size = new System.Drawing.Size(132, 33);
+            this.txtRightConv.TabIndex = 23;
             // 
-            // lblConvEquals
+            // txtLeftConv
             // 
-            this.lblConvEquals.AutoSize = true;
-            this.lblConvEquals.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConvEquals.Location = new System.Drawing.Point(186, 35);
-            this.lblConvEquals.Name = "lblConvEquals";
-            this.lblConvEquals.Size = new System.Drawing.Size(24, 25);
-            this.lblConvEquals.TabIndex = 24;
-            this.lblConvEquals.Text = "=";
+            this.txtLeftConv.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLeftConv.Location = new System.Drawing.Point(6, 31);
+            this.txtLeftConv.Name = "txtLeftConv";
+            this.txtLeftConv.Size = new System.Drawing.Size(118, 33);
+            this.txtLeftConv.TabIndex = 23;
+            this.txtLeftConv.TextChanged += new System.EventHandler(this.txtLeftConv_TextChanged);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // txtResult
+            // 
+            this.txtResult.BackColor = System.Drawing.Color.CadetBlue;
+            this.txtResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtResult.ForeColor = System.Drawing.Color.White;
+            this.txtResult.Location = new System.Drawing.Point(219, 47);
+            this.txtResult.Name = "txtResult";
+            this.txtResult.ReadOnly = true;
+            this.txtResult.Size = new System.Drawing.Size(148, 33);
+            this.txtResult.TabIndex = 24;
+            // 
+            // txtRightVal
+            // 
+            this.txtRightVal.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRightVal.Location = new System.Drawing.Point(219, 6);
+            this.txtRightVal.Name = "txtRightVal";
+            this.txtRightVal.Size = new System.Drawing.Size(148, 33);
+            this.txtRightVal.TabIndex = 23;
+            this.txtRightVal.Text = "1.00";
+            this.txtRightVal.TextChanged += new System.EventHandler(this.txtRightVal_TextChanged);
+            // 
+            // txtLeftVal
+            // 
+            this.txtLeftVal.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLeftVal.Location = new System.Drawing.Point(24, 6);
+            this.txtLeftVal.Name = "txtLeftVal";
+            this.txtLeftVal.Size = new System.Drawing.Size(148, 33);
+            this.txtLeftVal.TabIndex = 22;
+            this.txtLeftVal.TextChanged += new System.EventHandler(this.txtLeftVal_TextChanged);
+            // 
+            // timer2
+            // 
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // chkCaretFade
+            // 
+            this.chkCaretFade.AutoSize = true;
+            this.chkCaretFade.Checked = true;
+            this.chkCaretFade.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkCaretFade.Location = new System.Drawing.Point(337, 158);
+            this.chkCaretFade.Name = "chkCaretFade";
+            this.chkCaretFade.Size = new System.Drawing.Size(78, 17);
+            this.chkCaretFade.TabIndex = 12;
+            this.chkCaretFade.Text = "Caret Fade";
+            this.chkCaretFade.UseVisualStyleBackColor = true;
+            this.chkCaretFade.CheckedChanged += new System.EventHandler(this.chkCaretFade_CheckedChanged);
             // 
             // mainForm
             // 
@@ -450,17 +474,14 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtLeftVal;
-        private System.Windows.Forms.TextBox txtResult;
         private System.Windows.Forms.CheckBox cboCopyResult;
         private System.Windows.Forms.CheckBox cboClearLeft;
-        private System.Windows.Forms.TextBox txtRightVal;
         private System.Windows.Forms.RadioButton rbOperatorMult;
         private System.Windows.Forms.RadioButton rbOperatorPlus;
         private System.Windows.Forms.RadioButton rbOperatorSub;
@@ -484,6 +505,12 @@
         private System.Windows.Forms.ComboBox cboRightConvOp;
         private System.Windows.Forms.TextBox txtRightConv;
         private System.Windows.Forms.TextBox txtLeftConv;
+        private CustomTextBox txtResult;
+        private CustomTextBox txtRightVal;
+        private CustomTextBox txtLeftVal;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.CheckBox chkCaretFade;
     }
 }
 
