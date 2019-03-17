@@ -3,29 +3,77 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 /* Quick Calculator
  * by Daphne Lundquist
- * 3/14/2019   3.14159265359
- * v 1.02
+ * 3/16/2019
+ * v 1.03
  */
 
 namespace quickcalculator
 {
     public partial class mainForm : Form
     {
+        int cOp = 255;
+        int caretFadeAmount = 40;
+
         public mainForm()
         {
             InitializeComponent();
         }
 
+        private void mainForm_Load(object sender, EventArgs e)
+        {
+            cboResultOp.SelectedIndex = 0;
+            cboConversionType.SelectedIndex = 0;
+            rbOperatorMult.Select();
+            this.ActiveControl = txtLeftVal;
+
+            tmCaretFade.Enabled = true;
+
+            //set caret fade button colors (settings)
+            //btnCFadeColor1.BackColor = Color.FromArgb(255, 255, 0, 0);
+            //btnCFadeColor2.BackColor = Color.FromArgb(255, 255, 255, 0);
+            //LinearGradientBrush brush = new LinearGradientBrush(0, 20, Color.FromArgb(255, 255, 0, 0), Color.FromArgb(255, 255, 255, 0));
+            //Bitmap bb = gradientTest(btnCFadeFin.ClientRectangle, Color.FromArgb(255, 0, 0, 255), Color.FromArgb(255, 0, 255, 255));
+            //btnCFadeFin.BackgroundImage = bb;
+        }
+
+        Bitmap gradientTest(Rectangle r, Color c1, Color c2)
+        {
+            Bitmap bmp = new Bitmap(r.Width, r.Height);
+            Point startPoint = new Point(0, 0);
+            Point endPoint = new Point(20, 20);        
+            using (Graphics g = Graphics.FromImage(bmp))
+                for (int y = 0; y < r.Height; y++)
+                {
+                    using (LinearGradientBrush lgBrush = new LinearGradientBrush(startPoint, endPoint, c2, c1))
+                    {
+                        g.FillRectangle(lgBrush, 0, 0, 20, 30);
+                    }
+                }
+            return bmp;
+        }
+
         private void txtLeftVal_TextChanged(object sender, EventArgs e)
         {
             updateCalculation();
+
+            //ensure that the operators are not shown in txtLeftVal
+            if (!txtLeftVal.Text.Equals(""))
+            {
+                String lastChar = txtLeftVal.Text.Substring(txtLeftVal.Text.Length - 1);
+                if (lastChar.Equals("+") || lastChar.Equals("-") || lastChar.Equals("*") || lastChar.Equals("/"))
+                {
+                    txtLeftVal.Text = txtLeftVal.Text.Substring(0, txtLeftVal.Text.Length - 1);
+                }
+            }
         }
 
         private void txtRightVal_TextChanged(object sender, EventArgs e)
@@ -45,7 +93,7 @@ namespace quickcalculator
                     if (isNumeric)
                     {
                         lblInfo.Text = "...";
-                        timer1.Enabled = false;
+                        tmInfo.Enabled = false;
                         bool leftValParsed = double.TryParse(txtRightVal.Text, out double rightNum);
                         if (leftValParsed)
                         {
@@ -76,7 +124,7 @@ namespace quickcalculator
                     }
                     else
                     {
-                        timer1.Enabled = true;
+                        tmInfo.Enabled = true;
                         lblInfo.Text = "Error: non-numeric value detected.";
                     }
                 }
@@ -85,13 +133,46 @@ namespace quickcalculator
             {
                 lblInfo.Text = "...";
                 lblInfo.ForeColor = Color.Black;
-                timer1.Enabled = false;
+                tmInfo.Enabled = false;
             }
         }
 
-
         private void txtLeftVal_KeyPress(object sender, KeyPressEventArgs e)
         {
+            //Console.WriteLine(e.KeyChar);
+            //detect operators in keypress
+            if (e.KeyChar == (char)'+')
+            {
+                rbOperatorPlus.Checked = true;
+                txtRightVal.Focus();
+                txtRightVal.SelectAll();
+                //Console.WriteLine("plus pressed");
+            }
+
+            if (e.KeyChar == (char)'-')
+            {
+                rbOperatorSub.Checked = true;
+                txtRightVal.Focus();
+                txtRightVal.SelectAll();
+                //Console.WriteLine("subtract pressed");
+            }
+
+            if (e.KeyChar == (char)'*')
+            {
+                rbOperatorMult.Checked = true;
+                txtRightVal.Focus();
+                txtRightVal.SelectAll();
+                //Console.WriteLine("multiply pressed");
+            }
+
+            if (e.KeyChar == (char)'/')
+            {
+                rbOperatorDiv.Checked = true;
+                txtRightVal.Focus();
+                txtRightVal.SelectAll();
+                //Console.WriteLine("divide pressed");
+            }
+
             if (e.KeyChar == (char)Keys.Enter)
             {
                 if (cboCopyResult.Checked)
@@ -117,14 +198,14 @@ namespace quickcalculator
             }
         }
 
-        private void mainForm_Load(object sender, EventArgs e)
+        private void txtRightVal_KeyPress(object sender, KeyPressEventArgs e)
         {
-            cboResultOp.SelectedIndex = 0;
-            cboConversionType.SelectedIndex = 0;
-            rbOperatorMult.Select();
-            this.ActiveControl = txtLeftVal;
-
-            timer2.Enabled = true;
+            //on enter key press of txtRightVal, let's reset focus to the left box
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                txtLeftVal.Text = "";
+                txtLeftVal.Focus();
+            }
         }
 
         public Boolean IsNumber(String value)
@@ -156,16 +237,16 @@ namespace quickcalculator
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void tmInfo_Tick(object sender, EventArgs e)
         {
             //change lblInfo text color
             Random rnd = new Random();
             lblInfo.ForeColor = Color.FromArgb(rnd.Next(255), rnd.Next(255), rnd.Next(255));
         }
 
- /// <summary>
- /// ///////////////////////////////////////////////////////////////////////////////////////
- /// </summary>
+        /// <summary>
+        /// ///////////////////////////////////////////////////////////////////////////////////////
+        /// </summary>
 
         //length conversion constants
         double CV_mill = 0.0000254;
@@ -277,38 +358,67 @@ namespace quickcalculator
             return returnNum;
         }
 
-        //caret fade
-        int cOp = 255;
-        private void timer2_Tick(object sender, EventArgs e)
+        private CustomTextBox GetCurrentTB()
         {
             CustomTextBox currentTxt = txtLeftVal;
-            if(txtLeftVal.Focused)
+            if (txtLeftVal.Focused)
             {
                 currentTxt = txtLeftVal;
             }
-            if(txtRightVal.Focused)
+            if (txtRightVal.Focused)
             {
                 currentTxt = txtRightVal;
             }
-            if(txtResult.Focused)
+            if (txtResult.Focused)
             {
                 currentTxt = txtResult;
             }
-            if(cOp<0) { cOp = 255; }
-            cOp = cOp - 40;
-            currentTxt.updateCaretOpacity(cOp);
+            if (txtExampleTB.Focused)
+            {
+                currentTxt = txtExampleTB;
+            }
+            return currentTxt;
+        }
+
+        //caret fade
+        private void tmCaretFade_Tick(object sender, EventArgs e)
+        {
+            //Console.WriteLine("caret fade tick");
+            caretFadeAmount = Convert.ToInt32(Math.Round(numCaretFade.Value, 0));
+            //CustomTextBox currentTxt = GetCurrentTB();
+            CustomTextBox currentTxt = txtLeftVal;
+            if (txtLeftVal.Focused)
+            {
+                currentTxt = txtLeftVal;
+            }
+            if (txtRightVal.Focused)
+            {
+                currentTxt = txtRightVal;
+            }
+            if (txtResult.Focused)
+            {
+                currentTxt = txtResult;
+            }
+            if (txtExampleTB.Focused)
+            {
+                currentTxt = txtExampleTB;
+            }
+            if (cOp < 0) { cOp = 255; }
+            cOp = cOp - caretFadeAmount;
+            currentTxt.UpdateCaretOpacity(cOp);
         }
 
         private void chkCaretFade_CheckedChanged(object sender, EventArgs e)
         {
             if(chkCaretFade.Checked)
             {
-                timer2.Enabled = true;
+                tmCaretFade.Enabled = true;
             }
             else
             {
                 //turn off fade and set back to full op
-                timer2.Enabled = false;
+                tmCaretFade.Enabled = false;
+                //CustomTextBox currentTxt = GetCurrentTB();
                 CustomTextBox currentTxt = txtLeftVal;
                 if (txtLeftVal.Focused)
                 {
@@ -322,8 +432,99 @@ namespace quickcalculator
                 {
                     currentTxt = txtResult;
                 }
-                currentTxt.updateCaretOpacity(255);
+                if (txtExampleTB.Focused)
+                {
+                    currentTxt = txtExampleTB;
+                }
+                currentTxt.UpdateCaretOpacity(255);
             }
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            if(pnlSettings.Visible)
+            {
+                //already visible, hide it
+                pnlSettings.Visible = false;
+                pnlSettings.Location = new Point(5, 185);
+                txtLeftVal.Focus();
+            }
+            else
+            {
+                //not visible, show it
+                pnlSettings.Location = new Point(5, 3);
+                pnlSettings.Visible = true;
+                txtExampleTB.Focus();
+            }
+        }
+
+        private void numCaretFade_ValueChanged(object sender, EventArgs e)
+        {
+            //txtExampleTB.Focus();
+        }
+
+        private void btnCaretFadeTest_MouseEnter(object sender, EventArgs e)
+        {
+            txtExampleTB.Focus();
+        }
+
+        private void btnCaretFadeTest_Click(object sender, EventArgs e)
+        {
+            txtExampleTB.Focus();
+        }
+
+        private void tkColor1R_ValueChanged(object sender, EventArgs e)
+        {
+            txtLeftVal.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtRightVal.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtResult.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtExampleTB.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtColor1R.Text = tkColor1R.Value.ToString();
+        }
+
+        private void tkColor1G_ValueChanged(object sender, EventArgs e)
+        {
+            txtLeftVal.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtRightVal.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtResult.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtExampleTB.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtColor1G.Text = tkColor1G.Value.ToString();
+        }
+
+        private void tkColor1B_ValueChanged(object sender, EventArgs e)
+        {
+            txtLeftVal.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtRightVal.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtResult.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtExampleTB.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtColor1B.Text = tkColor1B.Value.ToString();
+        }
+
+        private void tkColor2R_ValueChanged(object sender, EventArgs e)
+        {
+            txtLeftVal.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtRightVal.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtResult.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtExampleTB.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtColor2R.Text = tkColor2R.Value.ToString();
+        }
+
+        private void tkColor2G_ValueChanged(object sender, EventArgs e)
+        {
+            txtLeftVal.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtRightVal.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtResult.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtExampleTB.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtColor2G.Text = tkColor2G.Value.ToString();
+        }
+
+        private void tkColor2B_ValueChanged(object sender, EventArgs e)
+        {
+            txtLeftVal.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtRightVal.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtResult.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtExampleTB.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
+            txtColor2B.Text = tkColor2B.Value.ToString();
         }
     }
 }

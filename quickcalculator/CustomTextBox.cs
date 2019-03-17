@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 /* Quick Calculator - CustomTextBox.cs
  * by Daphne Lundquist
- * 3/14/2019   3.14159265359
+ * 3/16/2019
  */
 
 namespace quickcalculator
@@ -21,12 +23,52 @@ namespace quickcalculator
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern bool ShowCaret(IntPtr hWnd);
+
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         static extern bool HideCaret(IntPtr hWnd);
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        static extern bool DestroyCaret();
+
+        [DllImport("kernel32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool SetProcessWorkingSetSize(IntPtr process,
+        UIntPtr minimumWorkingSetSize, UIntPtr maximumWorkingSetSize);
 
         int cWidth = 15;
         int cHeight = 31;
         int alphaVal = 255;
+        int fadeCount = 0;
+
+        Bitmap caret;
+        Graphics FormGraphics;
+        Rectangle rectBrush;
+        Point startPoint;
+        Point endPoint;
+        LinearGradientBrush brush;
+        int color1R;
+        int color1G;
+        int color1B;
+        int color2R;
+        int color2G;
+        int color2B;
+
+        //constructor
+        public CustomTextBox()
+        {
+            caret = new Bitmap(10, this.ClientRectangle.Height - 1);
+            FormGraphics = this.CreateGraphics();
+            rectBrush = new Rectangle(0, 0, 1, 1);
+            startPoint = new Point(0, 0);
+            endPoint = new Point(20, 20);
+
+            color1R = 255;
+            color1G = 0;
+            color1B = 0;
+            color2R = 255;
+            color2G = 255;
+            color2B = 0;
+        }
 
         protected override void OnGotFocus(System.EventArgs e)
         {
@@ -47,8 +89,9 @@ namespace quickcalculator
                     Point startPoint = new Point(0, 0);
                     Point endPoint = new Point(20, 20);
 
-                    LinearGradientBrush brush = new LinearGradientBrush(startPoint, endPoint, Color.FromArgb(alphaVal, 255, 0, 0), Color.FromArgb(alphaVal, 255, 255, 0));
-                    g.FillRectangle(brush, 0, 0, 20, 30);
+                LinearGradientBrush brush = new LinearGradientBrush(startPoint, endPoint, Color.FromArgb(alphaVal, color1R, color1G, color1B), Color.FromArgb(alphaVal, color2R, color2G, color2B));
+                //LinearGradientBrush brush = new LinearGradientBrush(startPoint, endPoint, Color.FromArgb(alphaVal, 255, 0, 0), Color.FromArgb(alphaVal, 255, 255, 0));
+                g.FillRectangle(brush, 0, 0, 20, 30);
 
                     //blend triangle caret
                     /*Blend BlendOptions = new Blend();
@@ -74,25 +117,67 @@ namespace quickcalculator
             }
         }
 
-        public void updateCaretOpacity(int op)
+        public void changeColors(int c1R, int c1G, int c1B, int c2R, int c2G, int c2B)
         {
-            if (op > 0)
+             color1R = c1R;
+             color1G = c1G;
+             color1B = c1B;
+             color2R = c2R;
+             color2G = c2G;
+             color2B = c2B;
+        }
+
+        public void UpdateCaretOpacity(int op)
+        {
+            try
             {
-                HideCaret(this.Handle);
-                Bitmap caret = new Bitmap(10, this.ClientRectangle.Height - 1);
-                using (Graphics g = Graphics.FromImage(caret))
+                if (op > 0)
                 {
-                    g.Clear(Color.Black);
-                    Graphics FormGraphics = this.CreateGraphics();
-                    Rectangle rectBrush = new Rectangle(0, 0, 1, 1);
-                    Point startPoint = new Point(0, 0);
-                    Point endPoint = new Point(20, 20);
-                    LinearGradientBrush brush = new LinearGradientBrush(startPoint, endPoint, Color.FromArgb(op, 255, 0, 0), Color.FromArgb(op, 255, 255, 0));
-                    g.FillRectangle(brush, 0, 0, 20, 30);
-                    CreateCaret(this.Handle, caret.GetHbitmap(Color.White), cWidth, cHeight);
-                    ShowCaret(this.Handle);
+                    //DestroyCaret();
+                    //HideCaret(this.Handle);
+                    caret = new Bitmap(10, this.ClientRectangle.Height - 1);
+                    using (Graphics g = Graphics.FromImage(caret))
+                    {
+                        g.Clear(Color.Black);
+                        //FormGraphics = this.CreateGraphics();
+                        //Rectangle rectBrush = new Rectangle(0, 0, 1, 1);
+                        //Point startPoint = new Point(0, 0);
+                        //Point endPoint = new Point(20, 20);
+                        brush = new LinearGradientBrush(startPoint, endPoint, Color.FromArgb(op, color1R, color1G, color1B), Color.FromArgb(op, color2R, color2G, color2B));
+                        //brush = new LinearGradientBrush(startPoint, endPoint, Color.FromArgb(op, 255, 0, 0), Color.FromArgb(op, 255, 255, 0));
+                        g.FillRectangle(brush, 0, 0, 20, 30);
+                        CreateCaret(this.Handle, caret.GetHbitmap(Color.White), cWidth, cHeight);
+                        ShowCaret(this.Handle);
+                    }
                 }
+                else
+                {
+                    //we get here once the opacity has dropped below 0 (end of a full fade)
+                    //let's free memory after awhile
+                    if (fadeCount > 169)
+                    {
+                        minimizeMemory();
+                        fadeCount = 0;
+                        //Console.WriteLine("memory freed");
+                    }
+                }
+                fadeCount++;
+            }
+            catch(Exception ee)
+            {
+                //excepc'ion
+                Console.WriteLine(ee.Message);
             }
         }
+
+        private static void minimizeMemory()
+        {
+            GC.Collect(GC.MaxGeneration);
+            GC.WaitForPendingFinalizers();
+            SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle,
+                (UIntPtr)0xFFFFFFFF, (UIntPtr)0xFFFFFFFF);
+        }
+
+
     }
 }
