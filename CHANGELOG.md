@@ -4,6 +4,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [released]
 
+## [1.0.4] - 2019-03-19
+### Changed
+- Apparently, calling CreateCaret multiple times per second creates a lot of GDI handles, and the program was crashing about 20 minutes in if the caret fade was enabled. Upon further digging, I found there is an adjustable 10,000 per program GDI handle limit in Windows and a maximum Windows number of 65,536. In 1.0.4 the program releases the GDI handles during the periodic garbage collection method and seems to solve the issue.
+
 ## [1.0.3] - 2019-03-16
 ### Added
 - Fixed memory leak. Program will now reduce its memory footprint every so often.

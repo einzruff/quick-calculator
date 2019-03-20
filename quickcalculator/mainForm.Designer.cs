@@ -48,9 +48,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.chkCaretFade = new System.Windows.Forms.CheckBox();
-            this.txtResult = new quickcalculator.CustomTextBox();
-            this.txtRightVal = new quickcalculator.CustomTextBox();
-            this.txtLeftVal = new quickcalculator.CustomTextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.cboConversionType = new System.Windows.Forms.ComboBox();
             this.cboLeftConvOp = new System.Windows.Forms.ComboBox();
@@ -81,11 +78,14 @@
             this.lblVersion = new System.Windows.Forms.Label();
             this.btnCaretFadeTest = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtExampleTB = new quickcalculator.CustomTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.numCaretFade = new System.Windows.Forms.NumericUpDown();
             this.lblSettingsHL = new System.Windows.Forms.Label();
             this.btnSettings = new System.Windows.Forms.Button();
+            this.txtExampleTB = new quickcalculator.CustomTextBox();
+            this.txtResult = new quickcalculator.CustomTextBox();
+            this.txtRightVal = new quickcalculator.CustomTextBox();
+            this.txtLeftVal = new quickcalculator.CustomTextBox();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -331,38 +331,6 @@
             this.chkCaretFade.UseVisualStyleBackColor = true;
             this.chkCaretFade.CheckedChanged += new System.EventHandler(this.chkCaretFade_CheckedChanged);
             // 
-            // txtResult
-            // 
-            this.txtResult.BackColor = System.Drawing.Color.CadetBlue;
-            this.txtResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtResult.ForeColor = System.Drawing.Color.White;
-            this.txtResult.Location = new System.Drawing.Point(219, 47);
-            this.txtResult.Name = "txtResult";
-            this.txtResult.ReadOnly = true;
-            this.txtResult.Size = new System.Drawing.Size(148, 33);
-            this.txtResult.TabIndex = 24;
-            // 
-            // txtRightVal
-            // 
-            this.txtRightVal.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRightVal.Location = new System.Drawing.Point(219, 6);
-            this.txtRightVal.Name = "txtRightVal";
-            this.txtRightVal.Size = new System.Drawing.Size(148, 33);
-            this.txtRightVal.TabIndex = 23;
-            this.txtRightVal.Text = "1.00";
-            this.txtRightVal.TextChanged += new System.EventHandler(this.txtRightVal_TextChanged);
-            this.txtRightVal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRightVal_KeyPress);
-            // 
-            // txtLeftVal
-            // 
-            this.txtLeftVal.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLeftVal.Location = new System.Drawing.Point(24, 6);
-            this.txtLeftVal.Name = "txtLeftVal";
-            this.txtLeftVal.Size = new System.Drawing.Size(148, 33);
-            this.txtLeftVal.TabIndex = 22;
-            this.txtLeftVal.TextChanged += new System.EventHandler(this.txtLeftVal_TextChanged);
-            this.txtLeftVal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLeftVal_KeyPress);
-            // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.LightGray;
@@ -521,7 +489,7 @@
             this.pnlSettings.Controls.Add(this.label1);
             this.pnlSettings.Controls.Add(this.numCaretFade);
             this.pnlSettings.Controls.Add(this.lblSettingsHL);
-            this.pnlSettings.Location = new System.Drawing.Point(4, 22);
+            this.pnlSettings.Location = new System.Drawing.Point(6, 182);
             this.pnlSettings.Name = "pnlSettings";
             this.pnlSettings.Size = new System.Drawing.Size(436, 215);
             this.pnlSettings.TabIndex = 23;
@@ -688,7 +656,7 @@
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(34, 13);
             this.lblVersion.TabIndex = 26;
-            this.lblVersion.Text = "v1.03";
+            this.lblVersion.Text = "v1.04";
             // 
             // btnCaretFadeTest
             // 
@@ -710,14 +678,6 @@
             this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 24;
             this.label2.Text = "Example";
-            // 
-            // txtExampleTB
-            // 
-            this.txtExampleTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtExampleTB.Location = new System.Drawing.Point(313, 19);
-            this.txtExampleTB.Name = "txtExampleTB";
-            this.txtExampleTB.Size = new System.Drawing.Size(67, 33);
-            this.txtExampleTB.TabIndex = 23;
             // 
             // label1
             // 
@@ -765,6 +725,46 @@
             this.btnSettings.Text = "~";
             this.btnSettings.UseVisualStyleBackColor = true;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            // 
+            // txtExampleTB
+            // 
+            this.txtExampleTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtExampleTB.Location = new System.Drawing.Point(313, 19);
+            this.txtExampleTB.Name = "txtExampleTB";
+            this.txtExampleTB.Size = new System.Drawing.Size(67, 33);
+            this.txtExampleTB.TabIndex = 23;
+            // 
+            // txtResult
+            // 
+            this.txtResult.BackColor = System.Drawing.Color.CadetBlue;
+            this.txtResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtResult.ForeColor = System.Drawing.Color.White;
+            this.txtResult.Location = new System.Drawing.Point(219, 47);
+            this.txtResult.Name = "txtResult";
+            this.txtResult.ReadOnly = true;
+            this.txtResult.Size = new System.Drawing.Size(148, 33);
+            this.txtResult.TabIndex = 24;
+            // 
+            // txtRightVal
+            // 
+            this.txtRightVal.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRightVal.Location = new System.Drawing.Point(219, 6);
+            this.txtRightVal.Name = "txtRightVal";
+            this.txtRightVal.Size = new System.Drawing.Size(148, 33);
+            this.txtRightVal.TabIndex = 23;
+            this.txtRightVal.Text = "1.00";
+            this.txtRightVal.TextChanged += new System.EventHandler(this.txtRightVal_TextChanged);
+            this.txtRightVal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRightVal_KeyPress);
+            // 
+            // txtLeftVal
+            // 
+            this.txtLeftVal.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLeftVal.Location = new System.Drawing.Point(24, 6);
+            this.txtLeftVal.Name = "txtLeftVal";
+            this.txtLeftVal.Size = new System.Drawing.Size(148, 33);
+            this.txtLeftVal.TabIndex = 22;
+            this.txtLeftVal.TextChanged += new System.EventHandler(this.txtLeftVal_TextChanged);
+            this.txtLeftVal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLeftVal_KeyPress);
             // 
             // mainForm
             // 

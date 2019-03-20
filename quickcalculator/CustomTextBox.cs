@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -6,12 +7,14 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 /* Quick Calculator - CustomTextBox.cs
  * by Daphne Lundquist
- * 3/16/2019
+ * 3/19/2019
  */
 
 namespace quickcalculator
@@ -29,6 +32,8 @@ namespace quickcalculator
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         static extern bool DestroyCaret();
+
+        [DllImport("gdi32.dll")] public static extern int DeleteObject(IntPtr hObject);
 
         [DllImport("kernel32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -52,6 +57,8 @@ namespace quickcalculator
         int color2R;
         int color2G;
         int color2B;
+        ArrayList bitmapPtrList = new ArrayList();
+        //List<IntPtr> handlesNp = new List<IntPtr>();
 
         //constructor
         public CustomTextBox()
@@ -68,12 +75,19 @@ namespace quickcalculator
             color2R = 255;
             color2G = 255;
             color2B = 0;
+
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
 
         protected override void OnGotFocus(System.EventArgs e)
         {
+            Console.WriteLine("OnGotFocus() triggered");
+            try
+            {
+                DestroyCaret();
                 //HideCaret(this.Handle);
-                Bitmap caret = new Bitmap(10, this.ClientRectangle.Height - 1);
+                //Bitmap caret = new Bitmap(10, this.ClientRectangle.Height - 1);
+                caret = new Bitmap(10, this.ClientRectangle.Height - 1);
                 using (Graphics g = Graphics.FromImage(caret))
                 {
                     g.Clear(Color.Black);
@@ -82,16 +96,19 @@ namespace quickcalculator
                     //g.DrawLine(Pens.White, new Point(1, caret.Height - 1), new Point(caret.Width - 1, caret.Height - 1));
                     //g.DrawLine(Pens.White, new Point(caret.Width - 1, caret.Height - 1), new Point(caret.Width / 2, 1));
 
-                    Graphics FormGraphics = this.CreateGraphics();
-                    Rectangle rectBrush = new Rectangle(0, 0, 1, 1);
+                    //Graphics FormGraphics = this.CreateGraphics();
+                    //Rectangle rectBrush = new Rectangle(0, 0, 1, 1);
+                    //FormGraphics = this.CreateGraphics();
+                    //rectBrush = new Rectangle(0, 0, 1, 1);
                     //LinearGradientBrush brush = new LinearGradientBrush(rectBrush, Color.White, Color.Black,LinearGradientMode.Horizontal);
 
-                    Point startPoint = new Point(0, 0);
-                    Point endPoint = new Point(20, 20);
+                    //Point startPoint = new Point(0, 0);
+                    //Point endPoint = new Point(20, 20);
 
-                LinearGradientBrush brush = new LinearGradientBrush(startPoint, endPoint, Color.FromArgb(alphaVal, color1R, color1G, color1B), Color.FromArgb(alphaVal, color2R, color2G, color2B));
-                //LinearGradientBrush brush = new LinearGradientBrush(startPoint, endPoint, Color.FromArgb(alphaVal, 255, 0, 0), Color.FromArgb(alphaVal, 255, 255, 0));
-                g.FillRectangle(brush, 0, 0, 20, 30);
+                    //LinearGradientBrush brush = new LinearGradientBrush(startPoint, endPoint, Color.FromArgb(alphaVal, color1R, color1G, color1B), Color.FromArgb(alphaVal, color2R, color2G, color2B));
+                    brush = new LinearGradientBrush(startPoint, endPoint, Color.FromArgb(alphaVal, color1R, color1G, color1B), Color.FromArgb(alphaVal, color2R, color2G, color2B));
+                    //LinearGradientBrush brush = new LinearGradientBrush(startPoint, endPoint, Color.FromArgb(alphaVal, 255, 0, 0), Color.FromArgb(alphaVal, 255, 255, 0));
+                    g.FillRectangle(brush, 0, 0, 20, 30);
 
                     //blend triangle caret
                     /*Blend BlendOptions = new Blend();
@@ -113,41 +130,61 @@ namespace quickcalculator
 
                     CreateCaret(this.Handle, caret.GetHbitmap(Color.White), cWidth, cHeight);
                     ShowCaret(this.Handle);
+                    caret.Dispose();
                     base.OnGotFocus(e);
+                }
+            }
+            catch (Exception ee)
+            {
+                //excepc'ion
+                Console.WriteLine(ee.Message);
             }
         }
 
         public void changeColors(int c1R, int c1G, int c1B, int c2R, int c2G, int c2B)
         {
-             color1R = c1R;
-             color1G = c1G;
-             color1B = c1B;
-             color2R = c2R;
-             color2G = c2G;
-             color2B = c2B;
+            color1R = c1R;
+            color1G = c1G;
+            color1B = c1B;
+            color2R = c2R;
+            color2G = c2G;
+            color2B = c2B;
         }
 
         public void UpdateCaretOpacity(int op)
         {
+            IntPtr bitmapPtr = new IntPtr();
             try
             {
                 if (op > 0)
                 {
                     //DestroyCaret();
                     //HideCaret(this.Handle);
-                    caret = new Bitmap(10, this.ClientRectangle.Height - 1);
-                    using (Graphics g = Graphics.FromImage(caret))
+                    //caret = new Bitmap(10, this.ClientRectangle.Height - 1);
+                    using (caret = new Bitmap(10, this.ClientRectangle.Height - 1))
                     {
-                        g.Clear(Color.Black);
-                        //FormGraphics = this.CreateGraphics();
-                        //Rectangle rectBrush = new Rectangle(0, 0, 1, 1);
-                        //Point startPoint = new Point(0, 0);
-                        //Point endPoint = new Point(20, 20);
-                        brush = new LinearGradientBrush(startPoint, endPoint, Color.FromArgb(op, color1R, color1G, color1B), Color.FromArgb(op, color2R, color2G, color2B));
-                        //brush = new LinearGradientBrush(startPoint, endPoint, Color.FromArgb(op, 255, 0, 0), Color.FromArgb(op, 255, 255, 0));
-                        g.FillRectangle(brush, 0, 0, 20, 30);
-                        CreateCaret(this.Handle, caret.GetHbitmap(Color.White), cWidth, cHeight);
-                        ShowCaret(this.Handle);
+                        using (Graphics g = Graphics.FromImage(caret))
+                        {
+                            g.Clear(Color.Black);
+                            //FormGraphics = this.CreateGraphics();
+                            //Rectangle rectBrush = new Rectangle(0, 0, 1, 1);
+                            //Point startPoint = new Point(0, 0);
+                            //Point endPoint = new Point(20, 20);
+                            brush = new LinearGradientBrush(startPoint, endPoint, Color.FromArgb(op, color1R, color1G, color1B), Color.FromArgb(op, color2R, color2G, color2B));
+                            //brush = new LinearGradientBrush(startPoint, endPoint, Color.FromArgb(op, 255, 0, 0), Color.FromArgb(op, 255, 255, 0));
+                            g.FillRectangle(brush, 0, 0, 20, 30);
+                            bitmapPtr = caret.GetHbitmap(Color.White);
+                            //CreateCaret(this.Handle, caret.GetHbitmap(Color.White), cWidth, cHeight);
+                            CreateCaret(this.Handle, bitmapPtr, cWidth, cHeight);
+                            ShowCaret(this.Handle);
+                            //add bitmapPtr to list  GDI handles to be deleted later  max num of GDI handles in prog. is 10,000 (windows 65,536)
+                            bitmapPtrList.Add(bitmapPtr);
+                            //caret.UnlockBits(bp.ToPointer());
+                            //caret.Dispose();
+                            //DestroyCaret();
+                            //Marshal.FreeHGlobal(bp);
+                            //Marshal.FreeCoTaskMem(bp);
+                        }                
                     }
                 }
                 else
@@ -156,6 +193,19 @@ namespace quickcalculator
                     //let's free memory after awhile
                     if (fadeCount > 169)
                     {
+                        //Console.WriteLine("at garbage collection " + bitmapPtrList.Count + " :items in list");
+                        //iterate through bitmapPtrList and delete bitmap pointers to prevent GDI handle overload
+                        for(int i = 0; i<bitmapPtrList.Count; i++)
+                        {
+                            IntPtr ptr = (IntPtr)bitmapPtrList[i];
+                            if (ptr != null)
+                            {
+                                DeleteObject(ptr);
+                            }
+                        }
+                        bitmapPtrList.Clear();
+
+                        //DestroyCaret();
                         minimizeMemory();
                         fadeCount = 0;
                         //Console.WriteLine("memory freed");
@@ -163,7 +213,7 @@ namespace quickcalculator
                 }
                 fadeCount++;
             }
-            catch(Exception ee)
+            catch (Exception ee)
             {
                 //excepc'ion
                 Console.WriteLine(ee.Message);
@@ -177,7 +227,5 @@ namespace quickcalculator
             SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle,
                 (UIntPtr)0xFFFFFFFF, (UIntPtr)0xFFFFFFFF);
         }
-
-
     }
 }
