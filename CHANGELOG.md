@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [released]
 
+## [1.0.5] - 2019-03-24
+### Added
+- You can now specify negative numbers in the left textbox if you position the caret to the leftmost position.
+- You can now change the result textbox background color with a color wheel in the settings panel.
+
+### Changed
+- Set initial caret fade speed to a slower speed of 12.
+- Moved caret fade checkbox to settings panel.
+- Initialized the conversion tab textboxes and made the text size of the units more readable.
+- On the conversion tab, both values of the calculation will now update as soon as you change a unit.
+
 ## [1.0.4] - 2019-03-19
 ### Changed
 - Apparently, calling CreateCaret multiple times per second creates a lot of GDI handles, and the program was crashing about 20 minutes in if the caret fade was enabled. Upon further digging, I found there is an adjustable 10,000 per program GDI handle limit in Windows and a maximum Windows number of 65,536. In 1.0.4 the program releases the GDI handles during the periodic garbage collection method and seems to solve the issue.

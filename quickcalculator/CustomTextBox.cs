@@ -14,7 +14,8 @@ using System.Windows.Forms;
 
 /* Quick Calculator - CustomTextBox.cs
  * by Daphne Lundquist
- * 3/19/2019
+ * 3/24/2019
+ * v 1.0.5
  */
 
 namespace quickcalculator

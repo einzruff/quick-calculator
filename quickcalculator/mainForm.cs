@@ -12,8 +12,8 @@ using System.Windows.Forms;
 
 /* Quick Calculator
  * by Daphne Lundquist
- * 3/19/2019
- * v 1.04
+ * 3/24/2019
+ * v 1.0.5
  */
 
 namespace quickcalculator
@@ -21,7 +21,7 @@ namespace quickcalculator
     public partial class mainForm : Form
     {
         int cOp = 255;
-        int caretFadeAmount = 40;
+        int caretFadeAmount = 12;
 
         public mainForm()
         {
@@ -43,6 +43,16 @@ namespace quickcalculator
             //LinearGradientBrush brush = new LinearGradientBrush(0, 20, Color.FromArgb(255, 255, 0, 0), Color.FromArgb(255, 255, 255, 0));
             //Bitmap bb = gradientTest(btnCFadeFin.ClientRectangle, Color.FromArgb(255, 0, 0, 255), Color.FromArgb(255, 0, 255, 255));
             //btnCFadeFin.BackgroundImage = bb;
+
+            //set Color Wheel initial color of Color.CadetBlue
+            Color cbRGB = Color.CadetBlue;
+            ColorRgb cwRGBInit = new ColorRgb(cbRGB.R, cbRGB.G, cbRGB.B);
+            ColorHsv cwHSVInit = (ColorHsv)cwRGBInit.ToHsv();
+            colorWheelz1.Color = cwHSVInit;
+
+            //set initial conversion units
+            cboLeftConvOp.SelectedIndex = 2; //inch
+            cboRightConvOp.SelectedIndex = 3; //foot
         }
 
         Bitmap gradientTest(Rectangle r, Color c1, Color c2)
@@ -69,9 +79,13 @@ namespace quickcalculator
             if (!txtLeftVal.Text.Equals(""))
             {
                 String lastChar = txtLeftVal.Text.Substring(txtLeftVal.Text.Length - 1);
-                if (lastChar.Equals("+") || lastChar.Equals("-") || lastChar.Equals("*") || lastChar.Equals("/"))
+                if (lastChar.Equals("+") || (lastChar.Equals("-")&&!firstCharNegative()) || lastChar.Equals("*") || lastChar.Equals("/"))
                 {
                     txtLeftVal.Text = txtLeftVal.Text.Substring(0, txtLeftVal.Text.Length - 1);
+                }
+                else if(lastChar.Equals("-") && firstCharNegative())
+                {
+                    //if initial val is negative don't remove the initial character
                 }
             }
         }
@@ -79,6 +93,17 @@ namespace quickcalculator
         private void txtRightVal_TextChanged(object sender, EventArgs e)
         {
             updateCalculation();
+        }
+
+        private bool firstCharNegative()
+        {
+            String textLeftVal = txtLeftVal.Text;
+            String lastChar = textLeftVal.Substring(textLeftVal.Length - 1);
+            if ((txtLeftVal.SelectionStart == 1) && lastChar.Equals("-"))
+            {
+                return true;
+            }
+            return false;
         }
 
         private void updateCalculation()
@@ -90,7 +115,7 @@ namespace quickcalculator
                 if (!lastChar.Equals("."))
                 {
                     bool isNumeric = IsNumber(lastChar.ToString());
-                    if (isNumeric)
+                    if ((isNumeric) || firstCharNegative())
                     {
                         lblInfo.Text = "...";
                         tmInfo.Enabled = false;
@@ -151,10 +176,19 @@ namespace quickcalculator
 
             if (e.KeyChar == (char)'-')
             {
-                rbOperatorSub.Checked = true;
-                txtRightVal.Focus();
-                txtRightVal.SelectAll();
-                //Console.WriteLine("subtract pressed");
+                //To detect negative numbers, we will assume that if '-' is pressed while at the beginning of the
+                //textbox, then the user wants a negative number
+                if (txtLeftVal.SelectionStart == 0)
+                {
+                    //don't change operator buttons
+                }
+                else
+                {
+                    rbOperatorSub.Checked = true;
+                    txtRightVal.Focus();
+                    txtRightVal.SelectAll();
+                    //Console.WriteLine("subtract pressed");
+                }
             }
 
             if (e.KeyChar == (char)'*')
@@ -271,9 +305,9 @@ namespace quickcalculator
         double CV_lightminute = 17987547480.0;
         double CV_lightsecond = 299792458.0;
 
-        private void txtLeftConv_TextChanged(object sender, EventArgs e)
+        private void computeConversion()
         {
-            if((cboLeftConvOp.SelectedItem != null) && (cboRightConvOp.SelectedItem != null))
+            if ((cboLeftConvOp.SelectedItem != null) && (cboRightConvOp.SelectedItem != null))
             {
                 //get left val
                 bool leftConv = double.TryParse(txtLeftConv.Text, out double leftConvVal);
@@ -295,6 +329,21 @@ namespace quickcalculator
                 double finalVal = leftConvVal * unitQuotient;
                 txtRightConv.Text = finalVal.ToString();
             }
+        }
+
+        private void txtLeftConv_TextChanged(object sender, EventArgs e)
+        {
+            computeConversion();
+        }
+
+        private void cboLeftConvOp_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            computeConversion();
+        }
+
+        private void cboRightConvOp_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            computeConversion();
         }
 
         private double getUnitVal (String st)
@@ -360,10 +409,10 @@ namespace quickcalculator
             return returnNum;
         }
 
- /////////////////////////////////////////////////////////////////////////////////////////////////////////
- // TextBox Caret Fader
- //
- /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // TextBox Caret Fader
+        //
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private CustomTextBox GetCurrentTB()
         {
@@ -533,5 +582,13 @@ namespace quickcalculator
             txtExampleTB.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
             txtColor2B.Text = tkColor2B.Value.ToString();
         }
+
+        private void colorWheelz1_ColorChanged(object sender, EventArgs e)
+        {
+            Color resultColor = colorWheelz1.Color.ToColor();
+            btnResultColor.BackColor = colorWheelz1.Color.ToColor();
+            txtResult.BackColor = resultColor;
+        }
+
     }
 }

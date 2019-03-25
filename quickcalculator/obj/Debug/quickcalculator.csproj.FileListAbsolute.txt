@@ -36,13 +36,13 @@ C:\files\gitfilez\quick-calc\quick-calculator\quickcalculator\obj\Debug\quickcal
 C:\files\gitfilez\quick-calc\quick-calculator\quickcalculator\obj\Debug\quickcalculator.csproj.CoreCompileInputs.cache
 C:\files\gitfilez\quick-calc\quick-calculator\quickcalculator\obj\Debug\quickcalculator.exe
 C:\files\gitfilez\quick-calc\quick-calculator\quickcalculator\obj\Debug\quickcalculator.pdb
-C:\Users\lundq\Desktop\gitfiles\quick-calculator\quickcalculator\bin\Debug\quickcalculator.exe.config
-C:\Users\lundq\Desktop\gitfiles\quick-calculator\quickcalculator\bin\Debug\quickcalculator.exe
-C:\Users\lundq\Desktop\gitfiles\quick-calculator\quickcalculator\bin\Debug\quickcalculator.pdb
 C:\Users\lundq\Desktop\gitfiles\quick-calculator\quickcalculator\obj\Debug\quickcalculator.mainForm.resources
 C:\Users\lundq\Desktop\gitfiles\quick-calculator\quickcalculator\obj\Debug\quickcalculator.Properties.Resources.resources
 C:\Users\lundq\Desktop\gitfiles\quick-calculator\quickcalculator\obj\Debug\quickcalculator.csproj.GenerateResource.cache
 C:\Users\lundq\Desktop\gitfiles\quick-calculator\quickcalculator\obj\Debug\quickcalculator.csproj.CoreCompileInputs.cache
+C:\Users\lundq\Desktop\gitfiles\quick-calculator\quickcalculator\bin\Debug\quickcalculator.exe.config
+C:\Users\lundq\Desktop\gitfiles\quick-calculator\quickcalculator\bin\Debug\quickcalculator.exe
+C:\Users\lundq\Desktop\gitfiles\quick-calculator\quickcalculator\bin\Debug\quickcalculator.pdb
 C:\Users\lundq\Desktop\gitfiles\quick-calculator\quickcalculator\obj\Debug\quickcalculator.exe
 C:\Users\lundq\Desktop\gitfiles\quick-calculator\quickcalculator\obj\Debug\quickcalculator.pdb
 C:\Users\lundq\Desktop\gitfiles\quick-calculator\quickcalculator\obj\Debug\quickcalculator.csprojAssemblyReference.cache
