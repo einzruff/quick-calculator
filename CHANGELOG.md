@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [released]
 
+## [1.0.6] - 2019-03-30
+### Added
+- Select caret shape (Rectangle or Triangle) in settings panel.
+- Added Mass as a conversion type.
+
+### Changed
+- Garbage collection now happens later, was too frequent.
+- Conversion textboxes resized to show Scientific Notation formatted numbers correctly.
+
 ## [1.0.5] - 2019-03-24
 ### Added
 - You can now specify negative numbers in the left textbox if you position the caret to the leftmost position.

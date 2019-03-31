@@ -47,7 +47,9 @@
             this.tmInfo = new System.Windows.Forms.Timer(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.chkCaretFade = new System.Windows.Forms.CheckBox();
+            this.txtResult = new quickcalculator.CustomTextBox();
+            this.txtRightVal = new quickcalculator.CustomTextBox();
+            this.txtLeftVal = new quickcalculator.CustomTextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.cboConversionType = new System.Windows.Forms.ComboBox();
             this.cboLeftConvOp = new System.Windows.Forms.ComboBox();
@@ -55,57 +57,58 @@
             this.cboRightConvOp = new System.Windows.Forms.ComboBox();
             this.txtRightConv = new System.Windows.Forms.TextBox();
             this.txtLeftConv = new System.Windows.Forms.TextBox();
+            this.chkCaretFade = new System.Windows.Forms.CheckBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.tmCaretFade = new System.Windows.Forms.Timer(this.components);
             this.pnlSettings = new System.Windows.Forms.Panel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.colorWheelz1 = new quickcalculator.ColorWheelz();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnResultColor = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.rbSelTriangle = new System.Windows.Forms.RadioButton();
+            this.rbSelRect = new System.Windows.Forms.RadioButton();
             this.txtColor2B = new System.Windows.Forms.TextBox();
+            this.txtExampleTB = new quickcalculator.CustomTextBox();
             this.txtColor2G = new System.Windows.Forms.TextBox();
+            this.numCaretFade = new System.Windows.Forms.NumericUpDown();
             this.txtColor2R = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.txtColor1B = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.txtColor1G = new System.Windows.Forms.TextBox();
+            this.btnCaretFadeTest = new System.Windows.Forms.Button();
             this.txtColor1R = new System.Windows.Forms.TextBox();
-            this.tkColor2B = new System.Windows.Forms.TrackBar();
-            this.tkColor2G = new System.Windows.Forms.TrackBar();
-            this.tkColor2R = new System.Windows.Forms.TrackBar();
-            this.tkColor1B = new System.Windows.Forms.TrackBar();
-            this.tkColor1G = new System.Windows.Forms.TrackBar();
-            this.tkColor1R = new System.Windows.Forms.TrackBar();
-            this.btnCFadeFin = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.tkColor2B = new System.Windows.Forms.TrackBar();
             this.label3 = new System.Windows.Forms.Label();
+            this.tkColor2G = new System.Windows.Forms.TrackBar();
+            this.tkColor1R = new System.Windows.Forms.TrackBar();
+            this.tkColor2R = new System.Windows.Forms.TrackBar();
+            this.tkColor1G = new System.Windows.Forms.TrackBar();
+            this.tkColor1B = new System.Windows.Forms.TrackBar();
+            this.btnCFadeFin = new System.Windows.Forms.Button();
             this.btnCFadeColor2 = new System.Windows.Forms.Button();
             this.btnCFadeColor1 = new System.Windows.Forms.Button();
             this.lblVersion = new System.Windows.Forms.Label();
-            this.btnCaretFadeTest = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.numCaretFade = new System.Windows.Forms.NumericUpDown();
             this.lblSettingsHL = new System.Windows.Forms.Label();
             this.btnSettings = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnResultColor = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.colorWheelz1 = new quickcalculator.ColorWheelz();
-            this.txtExampleTB = new quickcalculator.CustomTextBox();
-            this.txtResult = new quickcalculator.CustomTextBox();
-            this.txtRightVal = new quickcalculator.CustomTextBox();
-            this.txtLeftVal = new quickcalculator.CustomTextBox();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.pnlSettings.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCaretFade)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tkColor2B)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tkColor2G)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tkColor2R)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tkColor1B)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tkColor1G)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tkColor1R)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCaretFade)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tkColor2R)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tkColor1G)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tkColor1B)).BeginInit();
             this.SuspendLayout();
             // 
             // cboCopyResult
@@ -324,18 +327,37 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Calculator";
             // 
-            // chkCaretFade
+            // txtResult
             // 
-            this.chkCaretFade.AutoSize = true;
-            this.chkCaretFade.Checked = true;
-            this.chkCaretFade.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkCaretFade.Location = new System.Drawing.Point(6, 22);
-            this.chkCaretFade.Name = "chkCaretFade";
-            this.chkCaretFade.Size = new System.Drawing.Size(78, 17);
-            this.chkCaretFade.TabIndex = 12;
-            this.chkCaretFade.Text = "Caret Fade";
-            this.chkCaretFade.UseVisualStyleBackColor = true;
-            this.chkCaretFade.CheckedChanged += new System.EventHandler(this.chkCaretFade_CheckedChanged);
+            this.txtResult.BackColor = System.Drawing.Color.CadetBlue;
+            this.txtResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtResult.ForeColor = System.Drawing.Color.White;
+            this.txtResult.Location = new System.Drawing.Point(219, 47);
+            this.txtResult.Name = "txtResult";
+            this.txtResult.ReadOnly = true;
+            this.txtResult.Size = new System.Drawing.Size(148, 33);
+            this.txtResult.TabIndex = 24;
+            // 
+            // txtRightVal
+            // 
+            this.txtRightVal.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRightVal.Location = new System.Drawing.Point(219, 6);
+            this.txtRightVal.Name = "txtRightVal";
+            this.txtRightVal.Size = new System.Drawing.Size(148, 33);
+            this.txtRightVal.TabIndex = 23;
+            this.txtRightVal.Text = "1.00";
+            this.txtRightVal.TextChanged += new System.EventHandler(this.txtRightVal_TextChanged);
+            this.txtRightVal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRightVal_KeyPress);
+            // 
+            // txtLeftVal
+            // 
+            this.txtLeftVal.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLeftVal.Location = new System.Drawing.Point(24, 6);
+            this.txtLeftVal.Name = "txtLeftVal";
+            this.txtLeftVal.Size = new System.Drawing.Size(148, 33);
+            this.txtLeftVal.TabIndex = 22;
+            this.txtLeftVal.TextChanged += new System.EventHandler(this.txtLeftVal_TextChanged);
+            this.txtLeftVal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLeftVal_KeyPress);
             // 
             // tabPage2
             // 
@@ -357,11 +379,13 @@
             // 
             this.cboConversionType.FormattingEnabled = true;
             this.cboConversionType.Items.AddRange(new object[] {
-            "Length"});
+            "Length",
+            "Mass"});
             this.cboConversionType.Location = new System.Drawing.Point(6, 5);
             this.cboConversionType.Name = "cboConversionType";
             this.cboConversionType.Size = new System.Drawing.Size(144, 21);
             this.cboConversionType.TabIndex = 23;
+            this.cboConversionType.SelectedIndexChanged += new System.EventHandler(this.cboConversionType_SelectedIndexChanged);
             // 
             // cboLeftConvOp
             // 
@@ -392,7 +416,7 @@
             "lighthour",
             "lightminute",
             "lightsecond"});
-            this.cboLeftConvOp.Location = new System.Drawing.Point(202, 31);
+            this.cboLeftConvOp.Location = new System.Drawing.Point(249, 31);
             this.cboLeftConvOp.MaxLength = 2;
             this.cboLeftConvOp.Name = "cboLeftConvOp";
             this.cboLeftConvOp.Size = new System.Drawing.Size(148, 33);
@@ -403,7 +427,7 @@
             // 
             this.lblConvEquals.AutoSize = true;
             this.lblConvEquals.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConvEquals.Location = new System.Drawing.Point(350, 35);
+            this.lblConvEquals.Location = new System.Drawing.Point(397, 35);
             this.lblConvEquals.Name = "lblConvEquals";
             this.lblConvEquals.Size = new System.Drawing.Size(24, 25);
             this.lblConvEquals.TabIndex = 24;
@@ -438,7 +462,7 @@
             "lighthour",
             "lightminute",
             "lightsecond"});
-            this.cboRightConvOp.Location = new System.Drawing.Point(202, 70);
+            this.cboRightConvOp.Location = new System.Drawing.Point(249, 70);
             this.cboRightConvOp.MaxLength = 2;
             this.cboRightConvOp.Name = "cboRightConvOp";
             this.cboRightConvOp.Size = new System.Drawing.Size(148, 33);
@@ -447,21 +471,34 @@
             // 
             // txtRightConv
             // 
-            this.txtRightConv.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRightConv.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRightConv.Location = new System.Drawing.Point(6, 70);
             this.txtRightConv.Name = "txtRightConv";
-            this.txtRightConv.Size = new System.Drawing.Size(190, 33);
+            this.txtRightConv.Size = new System.Drawing.Size(238, 32);
             this.txtRightConv.TabIndex = 23;
             // 
             // txtLeftConv
             // 
-            this.txtLeftConv.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLeftConv.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLeftConv.Location = new System.Drawing.Point(6, 31);
             this.txtLeftConv.Name = "txtLeftConv";
-            this.txtLeftConv.Size = new System.Drawing.Size(190, 33);
+            this.txtLeftConv.Size = new System.Drawing.Size(238, 32);
             this.txtLeftConv.TabIndex = 23;
             this.txtLeftConv.Text = "0";
             this.txtLeftConv.TextChanged += new System.EventHandler(this.txtLeftConv_TextChanged);
+            // 
+            // chkCaretFade
+            // 
+            this.chkCaretFade.AutoSize = true;
+            this.chkCaretFade.Checked = true;
+            this.chkCaretFade.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkCaretFade.Location = new System.Drawing.Point(6, 22);
+            this.chkCaretFade.Name = "chkCaretFade";
+            this.chkCaretFade.Size = new System.Drawing.Size(78, 17);
+            this.chkCaretFade.TabIndex = 12;
+            this.chkCaretFade.Text = "Caret Fade";
+            this.chkCaretFade.UseVisualStyleBackColor = true;
+            this.chkCaretFade.CheckedChanged += new System.EventHandler(this.chkCaretFade_CheckedChanged);
             // 
             // errorProvider1
             // 
@@ -482,245 +519,55 @@
             this.pnlSettings.Controls.Add(this.btnCFadeColor1);
             this.pnlSettings.Controls.Add(this.lblVersion);
             this.pnlSettings.Controls.Add(this.lblSettingsHL);
-            this.pnlSettings.Location = new System.Drawing.Point(5, 182);
+            this.pnlSettings.Location = new System.Drawing.Point(5, 185);
             this.pnlSettings.Name = "pnlSettings";
             this.pnlSettings.Size = new System.Drawing.Size(427, 219);
             this.pnlSettings.TabIndex = 23;
             this.pnlSettings.Visible = false;
             // 
-            // txtColor2B
+            // groupBox3
             // 
-            this.txtColor2B.Location = new System.Drawing.Point(126, 151);
-            this.txtColor2B.Name = "txtColor2B";
-            this.txtColor2B.Size = new System.Drawing.Size(42, 20);
-            this.txtColor2B.TabIndex = 43;
-            this.txtColor2B.Text = "0";
+            this.groupBox3.Controls.Add(this.colorWheelz1);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.btnResultColor);
+            this.groupBox3.Location = new System.Drawing.Point(8, 225);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(381, 106);
+            this.groupBox3.TabIndex = 45;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Result Box";
             // 
-            // txtColor2G
+            // colorWheelz1
             // 
-            this.txtColor2G.Location = new System.Drawing.Point(126, 120);
-            this.txtColor2G.Name = "txtColor2G";
-            this.txtColor2G.Size = new System.Drawing.Size(42, 20);
-            this.txtColor2G.TabIndex = 42;
-            this.txtColor2G.Text = "255";
+            this.colorWheelz1.Location = new System.Drawing.Point(148, 11);
+            this.colorWheelz1.Name = "colorWheelz1";
+            this.colorWheelz1.Size = new System.Drawing.Size(92, 89);
+            this.colorWheelz1.TabIndex = 30;
+            this.colorWheelz1.ColorChanged += new System.EventHandler(this.colorWheelz1_ColorChanged);
             // 
-            // txtColor2R
+            // label5
             // 
-            this.txtColor2R.Location = new System.Drawing.Point(126, 85);
-            this.txtColor2R.Name = "txtColor2R";
-            this.txtColor2R.Size = new System.Drawing.Size(42, 20);
-            this.txtColor2R.TabIndex = 41;
-            this.txtColor2R.Text = "255";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 39);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(85, 13);
+            this.label5.TabIndex = 29;
+            this.label5.Text = "Result Box Color";
             // 
-            // txtColor1B
+            // btnResultColor
             // 
-            this.txtColor1B.Location = new System.Drawing.Point(4, 148);
-            this.txtColor1B.Name = "txtColor1B";
-            this.txtColor1B.Size = new System.Drawing.Size(42, 20);
-            this.txtColor1B.TabIndex = 40;
-            this.txtColor1B.Text = "0";
-            // 
-            // txtColor1G
-            // 
-            this.txtColor1G.Location = new System.Drawing.Point(4, 116);
-            this.txtColor1G.Name = "txtColor1G";
-            this.txtColor1G.Size = new System.Drawing.Size(42, 20);
-            this.txtColor1G.TabIndex = 39;
-            this.txtColor1G.Text = "0";
-            // 
-            // txtColor1R
-            // 
-            this.txtColor1R.Location = new System.Drawing.Point(4, 85);
-            this.txtColor1R.Name = "txtColor1R";
-            this.txtColor1R.Size = new System.Drawing.Size(42, 20);
-            this.txtColor1R.TabIndex = 38;
-            this.txtColor1R.Text = "255";
-            // 
-            // tkColor2B
-            // 
-            this.tkColor2B.AutoSize = false;
-            this.tkColor2B.Location = new System.Drawing.Point(166, 148);
-            this.tkColor2B.Maximum = 255;
-            this.tkColor2B.Name = "tkColor2B";
-            this.tkColor2B.Size = new System.Drawing.Size(65, 26);
-            this.tkColor2B.TabIndex = 37;
-            this.tkColor2B.ValueChanged += new System.EventHandler(this.tkColor2B_ValueChanged);
-            // 
-            // tkColor2G
-            // 
-            this.tkColor2G.AutoSize = false;
-            this.tkColor2G.Location = new System.Drawing.Point(166, 116);
-            this.tkColor2G.Maximum = 255;
-            this.tkColor2G.Name = "tkColor2G";
-            this.tkColor2G.Size = new System.Drawing.Size(65, 26);
-            this.tkColor2G.TabIndex = 36;
-            this.tkColor2G.Value = 255;
-            this.tkColor2G.ValueChanged += new System.EventHandler(this.tkColor2G_ValueChanged);
-            // 
-            // tkColor2R
-            // 
-            this.tkColor2R.AutoSize = false;
-            this.tkColor2R.Location = new System.Drawing.Point(166, 83);
-            this.tkColor2R.Maximum = 255;
-            this.tkColor2R.Name = "tkColor2R";
-            this.tkColor2R.Size = new System.Drawing.Size(65, 26);
-            this.tkColor2R.TabIndex = 35;
-            this.tkColor2R.Value = 255;
-            this.tkColor2R.ValueChanged += new System.EventHandler(this.tkColor2R_ValueChanged);
-            // 
-            // tkColor1B
-            // 
-            this.tkColor1B.AutoSize = false;
-            this.tkColor1B.Location = new System.Drawing.Point(43, 147);
-            this.tkColor1B.Maximum = 255;
-            this.tkColor1B.Name = "tkColor1B";
-            this.tkColor1B.Size = new System.Drawing.Size(65, 26);
-            this.tkColor1B.TabIndex = 34;
-            this.tkColor1B.ValueChanged += new System.EventHandler(this.tkColor1B_ValueChanged);
-            // 
-            // tkColor1G
-            // 
-            this.tkColor1G.AutoSize = false;
-            this.tkColor1G.Location = new System.Drawing.Point(43, 113);
-            this.tkColor1G.Maximum = 255;
-            this.tkColor1G.Name = "tkColor1G";
-            this.tkColor1G.Size = new System.Drawing.Size(65, 26);
-            this.tkColor1G.TabIndex = 33;
-            this.tkColor1G.ValueChanged += new System.EventHandler(this.tkColor1G_ValueChanged);
-            // 
-            // tkColor1R
-            // 
-            this.tkColor1R.AutoSize = false;
-            this.tkColor1R.Location = new System.Drawing.Point(43, 81);
-            this.tkColor1R.Maximum = 255;
-            this.tkColor1R.Name = "tkColor1R";
-            this.tkColor1R.Size = new System.Drawing.Size(65, 26);
-            this.tkColor1R.TabIndex = 32;
-            this.tkColor1R.Value = 255;
-            this.tkColor1R.ValueChanged += new System.EventHandler(this.tkColor1R_ValueChanged);
-            // 
-            // btnCFadeFin
-            // 
-            this.btnCFadeFin.Location = new System.Drawing.Point(401, 180);
-            this.btnCFadeFin.Name = "btnCFadeFin";
-            this.btnCFadeFin.Size = new System.Drawing.Size(10, 10);
-            this.btnCFadeFin.TabIndex = 31;
-            this.btnCFadeFin.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(123, 69);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(95, 13);
-            this.label4.TabIndex = 30;
-            this.label4.Text = "Caret Fade Color 2";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(2, 69);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(95, 13);
-            this.label3.TabIndex = 29;
-            this.label3.Text = "Caret Fade Color 1";
-            // 
-            // btnCFadeColor2
-            // 
-            this.btnCFadeColor2.Location = new System.Drawing.Point(401, 164);
-            this.btnCFadeColor2.Name = "btnCFadeColor2";
-            this.btnCFadeColor2.Size = new System.Drawing.Size(10, 12);
-            this.btnCFadeColor2.TabIndex = 28;
-            this.btnCFadeColor2.UseVisualStyleBackColor = true;
-            // 
-            // btnCFadeColor1
-            // 
-            this.btnCFadeColor1.Location = new System.Drawing.Point(401, 149);
-            this.btnCFadeColor1.Name = "btnCFadeColor1";
-            this.btnCFadeColor1.Size = new System.Drawing.Size(10, 11);
-            this.btnCFadeColor1.TabIndex = 27;
-            this.btnCFadeColor1.UseVisualStyleBackColor = true;
-            // 
-            // lblVersion
-            // 
-            this.lblVersion.AutoSize = true;
-            this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVersion.Location = new System.Drawing.Point(352, 16);
-            this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(37, 13);
-            this.lblVersion.TabIndex = 26;
-            this.lblVersion.Text = "v1.0.5";
-            // 
-            // btnCaretFadeTest
-            // 
-            this.btnCaretFadeTest.Location = new System.Drawing.Point(180, 27);
-            this.btnCaretFadeTest.Name = "btnCaretFadeTest";
-            this.btnCaretFadeTest.Size = new System.Drawing.Size(76, 36);
-            this.btnCaretFadeTest.TabIndex = 25;
-            this.btnCaretFadeTest.Text = "test (mouseover)";
-            this.btnCaretFadeTest.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCaretFadeTest.UseVisualStyleBackColor = true;
-            this.btnCaretFadeTest.Click += new System.EventHandler(this.btnCaretFadeTest_Click);
-            this.btnCaretFadeTest.MouseEnter += new System.EventHandler(this.btnCaretFadeTest_MouseEnter);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(261, 51);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 13);
-            this.label2.TabIndex = 24;
-            this.label2.Text = "Example";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(2, 46);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(129, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Caret Fade Speed (0-127)";
-            // 
-            // numCaretFade
-            // 
-            this.numCaretFade.Location = new System.Drawing.Point(140, 43);
-            this.numCaretFade.Maximum = new decimal(new int[] {
-            127,
-            0,
-            0,
-            0});
-            this.numCaretFade.Name = "numCaretFade";
-            this.numCaretFade.Size = new System.Drawing.Size(38, 20);
-            this.numCaretFade.TabIndex = 1;
-            this.numCaretFade.Value = new decimal(new int[] {
-            12,
-            0,
-            0,
-            0});
-            this.numCaretFade.ValueChanged += new System.EventHandler(this.numCaretFade_ValueChanged);
-            // 
-            // lblSettingsHL
-            // 
-            this.lblSettingsHL.AutoSize = true;
-            this.lblSettingsHL.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSettingsHL.Location = new System.Drawing.Point(3, 4);
-            this.lblSettingsHL.Name = "lblSettingsHL";
-            this.lblSettingsHL.Size = new System.Drawing.Size(75, 22);
-            this.lblSettingsHL.TabIndex = 0;
-            this.lblSettingsHL.Text = "Settings";
-            // 
-            // btnSettings
-            // 
-            this.btnSettings.Location = new System.Drawing.Point(431, 0);
-            this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(14, 14);
-            this.btnSettings.TabIndex = 24;
-            this.btnSettings.Text = "~";
-            this.btnSettings.UseVisualStyleBackColor = true;
-            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            this.btnResultColor.BackColor = System.Drawing.Color.CadetBlue;
+            this.btnResultColor.Location = new System.Drawing.Point(92, 16);
+            this.btnResultColor.Name = "btnResultColor";
+            this.btnResultColor.Size = new System.Drawing.Size(46, 38);
+            this.btnResultColor.TabIndex = 28;
+            this.btnResultColor.UseVisualStyleBackColor = false;
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.rbSelTriangle);
+            this.groupBox2.Controls.Add(this.rbSelRect);
             this.groupBox2.Controls.Add(this.chkCaretFade);
             this.groupBox2.Controls.Add(this.txtColor2B);
             this.groupBox2.Controls.Add(this.txtExampleTB);
@@ -748,43 +595,44 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Caret";
             // 
-            // groupBox3
+            // label6
             // 
-            this.groupBox3.Controls.Add(this.colorWheelz1);
-            this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Controls.Add(this.btnResultColor);
-            this.groupBox3.Location = new System.Drawing.Point(8, 225);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(381, 106);
-            this.groupBox3.TabIndex = 45;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Result Box";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(295, 82);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(66, 13);
+            this.label6.TabIndex = 47;
+            this.label6.Text = "Caret Shape";
             // 
-            // btnResultColor
+            // rbSelTriangle
             // 
-            this.btnResultColor.BackColor = System.Drawing.Color.CadetBlue;
-            this.btnResultColor.Location = new System.Drawing.Point(92, 16);
-            this.btnResultColor.Name = "btnResultColor";
-            this.btnResultColor.Size = new System.Drawing.Size(46, 38);
-            this.btnResultColor.TabIndex = 28;
-            this.btnResultColor.UseVisualStyleBackColor = false;
+            this.rbSelTriangle.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbSelTriangle.Location = new System.Drawing.Point(324, 97);
+            this.rbSelTriangle.Name = "rbSelTriangle";
+            this.rbSelTriangle.Size = new System.Drawing.Size(44, 40);
+            this.rbSelTriangle.TabIndex = 46;
+            this.rbSelTriangle.TabStop = true;
+            this.rbSelTriangle.UseVisualStyleBackColor = true;
+            this.rbSelTriangle.CheckedChanged += new System.EventHandler(this.rbSelTriangle_CheckedChanged);
             // 
-            // label5
+            // rbSelRect
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 39);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(85, 13);
-            this.label5.TabIndex = 29;
-            this.label5.Text = "Result Box Color";
+            this.rbSelRect.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbSelRect.Location = new System.Drawing.Point(279, 97);
+            this.rbSelRect.Name = "rbSelRect";
+            this.rbSelRect.Size = new System.Drawing.Size(44, 40);
+            this.rbSelRect.TabIndex = 45;
+            this.rbSelRect.TabStop = true;
+            this.rbSelRect.UseVisualStyleBackColor = true;
+            this.rbSelRect.CheckedChanged += new System.EventHandler(this.rbSelRect_CheckedChanged);
             // 
-            // colorWheelz1
+            // txtColor2B
             // 
-            this.colorWheelz1.Location = new System.Drawing.Point(148, 11);
-            this.colorWheelz1.Name = "colorWheelz1";
-            this.colorWheelz1.Size = new System.Drawing.Size(92, 89);
-            this.colorWheelz1.TabIndex = 30;
-            this.colorWheelz1.ColorChanged += new System.EventHandler(this.colorWheelz1_ColorChanged);
+            this.txtColor2B.Location = new System.Drawing.Point(126, 151);
+            this.txtColor2B.Name = "txtColor2B";
+            this.txtColor2B.Size = new System.Drawing.Size(42, 20);
+            this.txtColor2B.TabIndex = 43;
+            this.txtColor2B.Text = "0";
             // 
             // txtExampleTB
             // 
@@ -794,37 +642,228 @@
             this.txtExampleTB.Size = new System.Drawing.Size(67, 33);
             this.txtExampleTB.TabIndex = 23;
             // 
-            // txtResult
+            // txtColor2G
             // 
-            this.txtResult.BackColor = System.Drawing.Color.CadetBlue;
-            this.txtResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtResult.ForeColor = System.Drawing.Color.White;
-            this.txtResult.Location = new System.Drawing.Point(219, 47);
-            this.txtResult.Name = "txtResult";
-            this.txtResult.ReadOnly = true;
-            this.txtResult.Size = new System.Drawing.Size(148, 33);
-            this.txtResult.TabIndex = 24;
+            this.txtColor2G.Location = new System.Drawing.Point(126, 120);
+            this.txtColor2G.Name = "txtColor2G";
+            this.txtColor2G.Size = new System.Drawing.Size(42, 20);
+            this.txtColor2G.TabIndex = 42;
+            this.txtColor2G.Text = "255";
             // 
-            // txtRightVal
+            // numCaretFade
             // 
-            this.txtRightVal.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRightVal.Location = new System.Drawing.Point(219, 6);
-            this.txtRightVal.Name = "txtRightVal";
-            this.txtRightVal.Size = new System.Drawing.Size(148, 33);
-            this.txtRightVal.TabIndex = 23;
-            this.txtRightVal.Text = "1.00";
-            this.txtRightVal.TextChanged += new System.EventHandler(this.txtRightVal_TextChanged);
-            this.txtRightVal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRightVal_KeyPress);
+            this.numCaretFade.Location = new System.Drawing.Point(140, 43);
+            this.numCaretFade.Maximum = new decimal(new int[] {
+            127,
+            0,
+            0,
+            0});
+            this.numCaretFade.Name = "numCaretFade";
+            this.numCaretFade.Size = new System.Drawing.Size(38, 20);
+            this.numCaretFade.TabIndex = 1;
+            this.numCaretFade.Value = new decimal(new int[] {
+            12,
+            0,
+            0,
+            0});
+            this.numCaretFade.ValueChanged += new System.EventHandler(this.numCaretFade_ValueChanged);
             // 
-            // txtLeftVal
+            // txtColor2R
             // 
-            this.txtLeftVal.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLeftVal.Location = new System.Drawing.Point(24, 6);
-            this.txtLeftVal.Name = "txtLeftVal";
-            this.txtLeftVal.Size = new System.Drawing.Size(148, 33);
-            this.txtLeftVal.TabIndex = 22;
-            this.txtLeftVal.TextChanged += new System.EventHandler(this.txtLeftVal_TextChanged);
-            this.txtLeftVal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLeftVal_KeyPress);
+            this.txtColor2R.Location = new System.Drawing.Point(126, 85);
+            this.txtColor2R.Name = "txtColor2R";
+            this.txtColor2R.Size = new System.Drawing.Size(42, 20);
+            this.txtColor2R.TabIndex = 41;
+            this.txtColor2R.Text = "255";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(2, 46);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(129, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Caret Fade Speed (0-127)";
+            // 
+            // txtColor1B
+            // 
+            this.txtColor1B.Location = new System.Drawing.Point(4, 148);
+            this.txtColor1B.Name = "txtColor1B";
+            this.txtColor1B.Size = new System.Drawing.Size(42, 20);
+            this.txtColor1B.TabIndex = 40;
+            this.txtColor1B.Text = "0";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(261, 51);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(47, 13);
+            this.label2.TabIndex = 24;
+            this.label2.Text = "Example";
+            // 
+            // txtColor1G
+            // 
+            this.txtColor1G.Location = new System.Drawing.Point(4, 116);
+            this.txtColor1G.Name = "txtColor1G";
+            this.txtColor1G.Size = new System.Drawing.Size(42, 20);
+            this.txtColor1G.TabIndex = 39;
+            this.txtColor1G.Text = "0";
+            // 
+            // btnCaretFadeTest
+            // 
+            this.btnCaretFadeTest.Location = new System.Drawing.Point(180, 27);
+            this.btnCaretFadeTest.Name = "btnCaretFadeTest";
+            this.btnCaretFadeTest.Size = new System.Drawing.Size(76, 36);
+            this.btnCaretFadeTest.TabIndex = 25;
+            this.btnCaretFadeTest.Text = "test (mouseover)";
+            this.btnCaretFadeTest.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCaretFadeTest.UseVisualStyleBackColor = true;
+            this.btnCaretFadeTest.Click += new System.EventHandler(this.btnCaretFadeTest_Click);
+            this.btnCaretFadeTest.MouseEnter += new System.EventHandler(this.btnCaretFadeTest_MouseEnter);
+            // 
+            // txtColor1R
+            // 
+            this.txtColor1R.Location = new System.Drawing.Point(4, 85);
+            this.txtColor1R.Name = "txtColor1R";
+            this.txtColor1R.Size = new System.Drawing.Size(42, 20);
+            this.txtColor1R.TabIndex = 38;
+            this.txtColor1R.Text = "255";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(123, 69);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(95, 13);
+            this.label4.TabIndex = 30;
+            this.label4.Text = "Caret Fade Color 2";
+            // 
+            // tkColor2B
+            // 
+            this.tkColor2B.AutoSize = false;
+            this.tkColor2B.Location = new System.Drawing.Point(166, 148);
+            this.tkColor2B.Maximum = 255;
+            this.tkColor2B.Name = "tkColor2B";
+            this.tkColor2B.Size = new System.Drawing.Size(65, 26);
+            this.tkColor2B.TabIndex = 37;
+            this.tkColor2B.ValueChanged += new System.EventHandler(this.tkColor2B_ValueChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(2, 69);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(95, 13);
+            this.label3.TabIndex = 29;
+            this.label3.Text = "Caret Fade Color 1";
+            // 
+            // tkColor2G
+            // 
+            this.tkColor2G.AutoSize = false;
+            this.tkColor2G.Location = new System.Drawing.Point(166, 116);
+            this.tkColor2G.Maximum = 255;
+            this.tkColor2G.Name = "tkColor2G";
+            this.tkColor2G.Size = new System.Drawing.Size(65, 26);
+            this.tkColor2G.TabIndex = 36;
+            this.tkColor2G.Value = 255;
+            this.tkColor2G.ValueChanged += new System.EventHandler(this.tkColor2G_ValueChanged);
+            // 
+            // tkColor1R
+            // 
+            this.tkColor1R.AutoSize = false;
+            this.tkColor1R.Location = new System.Drawing.Point(43, 81);
+            this.tkColor1R.Maximum = 255;
+            this.tkColor1R.Name = "tkColor1R";
+            this.tkColor1R.Size = new System.Drawing.Size(65, 26);
+            this.tkColor1R.TabIndex = 32;
+            this.tkColor1R.Value = 255;
+            this.tkColor1R.ValueChanged += new System.EventHandler(this.tkColor1R_ValueChanged);
+            // 
+            // tkColor2R
+            // 
+            this.tkColor2R.AutoSize = false;
+            this.tkColor2R.Location = new System.Drawing.Point(166, 83);
+            this.tkColor2R.Maximum = 255;
+            this.tkColor2R.Name = "tkColor2R";
+            this.tkColor2R.Size = new System.Drawing.Size(65, 26);
+            this.tkColor2R.TabIndex = 35;
+            this.tkColor2R.Value = 255;
+            this.tkColor2R.ValueChanged += new System.EventHandler(this.tkColor2R_ValueChanged);
+            // 
+            // tkColor1G
+            // 
+            this.tkColor1G.AutoSize = false;
+            this.tkColor1G.Location = new System.Drawing.Point(43, 113);
+            this.tkColor1G.Maximum = 255;
+            this.tkColor1G.Name = "tkColor1G";
+            this.tkColor1G.Size = new System.Drawing.Size(65, 26);
+            this.tkColor1G.TabIndex = 33;
+            this.tkColor1G.ValueChanged += new System.EventHandler(this.tkColor1G_ValueChanged);
+            // 
+            // tkColor1B
+            // 
+            this.tkColor1B.AutoSize = false;
+            this.tkColor1B.Location = new System.Drawing.Point(43, 147);
+            this.tkColor1B.Maximum = 255;
+            this.tkColor1B.Name = "tkColor1B";
+            this.tkColor1B.Size = new System.Drawing.Size(65, 26);
+            this.tkColor1B.TabIndex = 34;
+            this.tkColor1B.ValueChanged += new System.EventHandler(this.tkColor1B_ValueChanged);
+            // 
+            // btnCFadeFin
+            // 
+            this.btnCFadeFin.Location = new System.Drawing.Point(401, 180);
+            this.btnCFadeFin.Name = "btnCFadeFin";
+            this.btnCFadeFin.Size = new System.Drawing.Size(10, 10);
+            this.btnCFadeFin.TabIndex = 31;
+            this.btnCFadeFin.UseVisualStyleBackColor = true;
+            // 
+            // btnCFadeColor2
+            // 
+            this.btnCFadeColor2.Location = new System.Drawing.Point(401, 164);
+            this.btnCFadeColor2.Name = "btnCFadeColor2";
+            this.btnCFadeColor2.Size = new System.Drawing.Size(10, 12);
+            this.btnCFadeColor2.TabIndex = 28;
+            this.btnCFadeColor2.UseVisualStyleBackColor = true;
+            // 
+            // btnCFadeColor1
+            // 
+            this.btnCFadeColor1.Location = new System.Drawing.Point(401, 149);
+            this.btnCFadeColor1.Name = "btnCFadeColor1";
+            this.btnCFadeColor1.Size = new System.Drawing.Size(10, 11);
+            this.btnCFadeColor1.TabIndex = 27;
+            this.btnCFadeColor1.UseVisualStyleBackColor = true;
+            // 
+            // lblVersion
+            // 
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVersion.Location = new System.Drawing.Point(352, 16);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(37, 13);
+            this.lblVersion.TabIndex = 26;
+            this.lblVersion.Text = "v1.0.6";
+            // 
+            // lblSettingsHL
+            // 
+            this.lblSettingsHL.AutoSize = true;
+            this.lblSettingsHL.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSettingsHL.Location = new System.Drawing.Point(3, 4);
+            this.lblSettingsHL.Name = "lblSettingsHL";
+            this.lblSettingsHL.Size = new System.Drawing.Size(75, 22);
+            this.lblSettingsHL.TabIndex = 0;
+            this.lblSettingsHL.Text = "Settings";
+            // 
+            // btnSettings
+            // 
+            this.btnSettings.Location = new System.Drawing.Point(431, 0);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(14, 14);
+            this.btnSettings.TabIndex = 24;
+            this.btnSettings.Text = "~";
+            this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
             // mainForm
             // 
@@ -847,17 +886,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.pnlSettings.ResumeLayout(false);
             this.pnlSettings.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tkColor2B)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tkColor2G)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tkColor2R)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tkColor1B)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tkColor1G)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tkColor1R)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCaretFade)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCaretFade)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tkColor2B)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tkColor2G)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tkColor1R)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tkColor2R)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tkColor1G)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tkColor1B)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -925,6 +964,9 @@
         private System.Windows.Forms.Button btnResultColor;
         private System.Windows.Forms.GroupBox groupBox2;
         private ColorWheelz colorWheelz1;
+        private System.Windows.Forms.RadioButton rbSelTriangle;
+        private System.Windows.Forms.RadioButton rbSelRect;
+        private System.Windows.Forms.Label label6;
     }
 }
 
