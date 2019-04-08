@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [released]
 
+## [1.0.7] - 2019-04-07
+### Added
+- Added Volume as a conversion type.
+
+### Changed
+- Resized rect caret to align with bottom of textbox.
+
 ## [1.0.6] - 2019-03-30
 ### Added
 - Select caret shape (Rectangle or Triangle) in settings panel.

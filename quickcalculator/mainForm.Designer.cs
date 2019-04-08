@@ -47,9 +47,6 @@
             this.tmInfo = new System.Windows.Forms.Timer(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.txtResult = new quickcalculator.CustomTextBox();
-            this.txtRightVal = new quickcalculator.CustomTextBox();
-            this.txtLeftVal = new quickcalculator.CustomTextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.cboConversionType = new System.Windows.Forms.ComboBox();
             this.cboLeftConvOp = new System.Windows.Forms.ComboBox();
@@ -62,7 +59,6 @@
             this.tmCaretFade = new System.Windows.Forms.Timer(this.components);
             this.pnlSettings = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.colorWheelz1 = new quickcalculator.ColorWheelz();
             this.label5 = new System.Windows.Forms.Label();
             this.btnResultColor = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -70,7 +66,6 @@
             this.rbSelTriangle = new System.Windows.Forms.RadioButton();
             this.rbSelRect = new System.Windows.Forms.RadioButton();
             this.txtColor2B = new System.Windows.Forms.TextBox();
-            this.txtExampleTB = new quickcalculator.CustomTextBox();
             this.txtColor2G = new System.Windows.Forms.TextBox();
             this.numCaretFade = new System.Windows.Forms.NumericUpDown();
             this.txtColor2R = new System.Windows.Forms.TextBox();
@@ -94,6 +89,11 @@
             this.lblVersion = new System.Windows.Forms.Label();
             this.lblSettingsHL = new System.Windows.Forms.Label();
             this.btnSettings = new System.Windows.Forms.Button();
+            this.colorWheelz1 = new quickcalculator.ColorWheelz();
+            this.txtExampleTB = new quickcalculator.CustomTextBox();
+            this.txtResult = new quickcalculator.CustomTextBox();
+            this.txtRightVal = new quickcalculator.CustomTextBox();
+            this.txtLeftVal = new quickcalculator.CustomTextBox();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -327,38 +327,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Calculator";
             // 
-            // txtResult
-            // 
-            this.txtResult.BackColor = System.Drawing.Color.CadetBlue;
-            this.txtResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtResult.ForeColor = System.Drawing.Color.White;
-            this.txtResult.Location = new System.Drawing.Point(219, 47);
-            this.txtResult.Name = "txtResult";
-            this.txtResult.ReadOnly = true;
-            this.txtResult.Size = new System.Drawing.Size(148, 33);
-            this.txtResult.TabIndex = 24;
-            // 
-            // txtRightVal
-            // 
-            this.txtRightVal.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRightVal.Location = new System.Drawing.Point(219, 6);
-            this.txtRightVal.Name = "txtRightVal";
-            this.txtRightVal.Size = new System.Drawing.Size(148, 33);
-            this.txtRightVal.TabIndex = 23;
-            this.txtRightVal.Text = "1.00";
-            this.txtRightVal.TextChanged += new System.EventHandler(this.txtRightVal_TextChanged);
-            this.txtRightVal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRightVal_KeyPress);
-            // 
-            // txtLeftVal
-            // 
-            this.txtLeftVal.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLeftVal.Location = new System.Drawing.Point(24, 6);
-            this.txtLeftVal.Name = "txtLeftVal";
-            this.txtLeftVal.Size = new System.Drawing.Size(148, 33);
-            this.txtLeftVal.TabIndex = 22;
-            this.txtLeftVal.TextChanged += new System.EventHandler(this.txtLeftVal_TextChanged);
-            this.txtLeftVal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLeftVal_KeyPress);
-            // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.LightGray;
@@ -380,7 +348,8 @@
             this.cboConversionType.FormattingEnabled = true;
             this.cboConversionType.Items.AddRange(new object[] {
             "Length",
-            "Mass"});
+            "Mass",
+            "Volume"});
             this.cboConversionType.Location = new System.Drawing.Point(6, 5);
             this.cboConversionType.Name = "cboConversionType";
             this.cboConversionType.Size = new System.Drawing.Size(144, 21);
@@ -537,14 +506,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Result Box";
             // 
-            // colorWheelz1
-            // 
-            this.colorWheelz1.Location = new System.Drawing.Point(148, 11);
-            this.colorWheelz1.Name = "colorWheelz1";
-            this.colorWheelz1.Size = new System.Drawing.Size(92, 89);
-            this.colorWheelz1.TabIndex = 30;
-            this.colorWheelz1.ColorChanged += new System.EventHandler(this.colorWheelz1_ColorChanged);
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -633,14 +594,6 @@
             this.txtColor2B.Size = new System.Drawing.Size(42, 20);
             this.txtColor2B.TabIndex = 43;
             this.txtColor2B.Text = "0";
-            // 
-            // txtExampleTB
-            // 
-            this.txtExampleTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtExampleTB.Location = new System.Drawing.Point(308, 31);
-            this.txtExampleTB.Name = "txtExampleTB";
-            this.txtExampleTB.Size = new System.Drawing.Size(67, 33);
-            this.txtExampleTB.TabIndex = 23;
             // 
             // txtColor2G
             // 
@@ -843,7 +796,7 @@
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(37, 13);
             this.lblVersion.TabIndex = 26;
-            this.lblVersion.Text = "v1.0.6";
+            this.lblVersion.Text = "v1.0.7";
             // 
             // lblSettingsHL
             // 
@@ -864,6 +817,54 @@
             this.btnSettings.Text = "~";
             this.btnSettings.UseVisualStyleBackColor = true;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            // 
+            // colorWheelz1
+            // 
+            this.colorWheelz1.Location = new System.Drawing.Point(148, 11);
+            this.colorWheelz1.Name = "colorWheelz1";
+            this.colorWheelz1.Size = new System.Drawing.Size(92, 89);
+            this.colorWheelz1.TabIndex = 30;
+            this.colorWheelz1.ColorChanged += new System.EventHandler(this.colorWheelz1_ColorChanged);
+            // 
+            // txtExampleTB
+            // 
+            this.txtExampleTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtExampleTB.Location = new System.Drawing.Point(308, 31);
+            this.txtExampleTB.Name = "txtExampleTB";
+            this.txtExampleTB.Size = new System.Drawing.Size(67, 33);
+            this.txtExampleTB.TabIndex = 23;
+            // 
+            // txtResult
+            // 
+            this.txtResult.BackColor = System.Drawing.Color.CadetBlue;
+            this.txtResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtResult.ForeColor = System.Drawing.Color.White;
+            this.txtResult.Location = new System.Drawing.Point(219, 47);
+            this.txtResult.Name = "txtResult";
+            this.txtResult.ReadOnly = true;
+            this.txtResult.Size = new System.Drawing.Size(148, 33);
+            this.txtResult.TabIndex = 24;
+            // 
+            // txtRightVal
+            // 
+            this.txtRightVal.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRightVal.Location = new System.Drawing.Point(219, 6);
+            this.txtRightVal.Name = "txtRightVal";
+            this.txtRightVal.Size = new System.Drawing.Size(148, 33);
+            this.txtRightVal.TabIndex = 23;
+            this.txtRightVal.Text = "1.00";
+            this.txtRightVal.TextChanged += new System.EventHandler(this.txtRightVal_TextChanged);
+            this.txtRightVal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRightVal_KeyPress);
+            // 
+            // txtLeftVal
+            // 
+            this.txtLeftVal.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLeftVal.Location = new System.Drawing.Point(24, 6);
+            this.txtLeftVal.Name = "txtLeftVal";
+            this.txtLeftVal.Size = new System.Drawing.Size(148, 33);
+            this.txtLeftVal.TabIndex = 22;
+            this.txtLeftVal.TextChanged += new System.EventHandler(this.txtLeftVal_TextChanged);
+            this.txtLeftVal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLeftVal_KeyPress);
             // 
             // mainForm
             // 

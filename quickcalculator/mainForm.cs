@@ -12,8 +12,8 @@ using System.Windows.Forms;
 
 /* Quick Calculator
  * by Daphne Lundquist
- * 3/30/2019
- * v 1.0.6
+ * 4/7/2019
+ * v 1.0.7
  */
 
 namespace quickcalculator
@@ -35,7 +35,6 @@ namespace quickcalculator
             rbOperatorMult.Select();
             this.ActiveControl = txtLeftVal;
 
-            //t1mCaret
             tmCaretFade.Enabled = true;
 
             //set caret fade button colors (settings)
@@ -394,6 +393,32 @@ namespace quickcalculator
         double CV_pound = 453.59237;
         double CV_ton = 907200.0;
 
+        //volume
+        double CV_cubickilometer = 100000000000000;
+        double CV_cubicmeter = 100000;
+        double CV_hectoliter = 10000;
+        double CV_decaliter = 1000;
+        double CV_liter = 100;
+        double CV_deciliter = 10;
+        double CV_centiliter = 1.0;
+        double CV_cubiccentimeter = 10;
+        double CV_milliliter = 0.10;
+        double CV_cubicmilliliter = 0.00010;
+        double CV_microliter = 0.00010;
+        double CV_gallon = 378.541; //need to further refine US liquid measure constants
+        double CV_quart = 94.635; //refine
+        double CV_pint = 47.318; //they come in pints?
+        double CV_gill = 11.829; //refine
+        double CV_boardfoot = 2359.737; //refine   
+        double CV_fluidounce = 2.957; //refine
+        double CV_cup = 23.659; //refine
+        double CV_teaspoon = 0.495; //refine
+        double CV_tablespoon = 1.478677; //refine
+        double CV_cubicinch = 1.639; //refine
+        double CV_fluiddram = 0.36966; //refine
+        double CV_minim = 0.00616115; //refine
+        double CV_usbeerkeg = 5868.50; //refine
+
         //concentration solution constants
         /*double CV_kilogramliter = 1;
         double CV_gramliter = 0.001;
@@ -544,6 +569,66 @@ namespace quickcalculator
                 txtRightConv.Text = "0";
             }
 
+            if (convType.Equals("Volume"))
+            {
+                cboLeftConvOp.Items.Clear();
+                cboLeftConvOp.Items.Add("");
+                cboLeftConvOp.Items.Add("cubickilometer");
+                cboLeftConvOp.Items.Add("cubicmeter");
+                cboLeftConvOp.Items.Add("hectoliter");
+                cboLeftConvOp.Items.Add("decaliter");
+                cboLeftConvOp.Items.Add("liter");
+                cboLeftConvOp.Items.Add("deciliter");
+                cboLeftConvOp.Items.Add("centiliter");
+                cboLeftConvOp.Items.Add("cubiccentimeter");
+                cboLeftConvOp.Items.Add("milliliter");
+                cboLeftConvOp.Items.Add("cubicmilliliter");
+                cboLeftConvOp.Items.Add("microliter");
+                cboLeftConvOp.Items.Add("gallon");
+                cboLeftConvOp.Items.Add("quart");
+                cboLeftConvOp.Items.Add("pint");
+                cboLeftConvOp.Items.Add("gill");
+                cboLeftConvOp.Items.Add("boardfoot");
+                cboLeftConvOp.Items.Add("fluidounce");
+                cboLeftConvOp.Items.Add("cup");
+                cboLeftConvOp.Items.Add("teaspoon");
+                cboLeftConvOp.Items.Add("tablespoon");
+                cboLeftConvOp.Items.Add("cubicinch");
+                cboLeftConvOp.Items.Add("fluiddram");
+                cboLeftConvOp.Items.Add("minim");
+                cboLeftConvOp.Items.Add("usbeerkeg");
+                cboLeftConvOp.SelectedIndex = 0;
+                txtLeftConv.Text = "0";
+                cboRightConvOp.Items.Clear();
+                cboRightConvOp.Items.Add("");
+                cboRightConvOp.Items.Add("cubickilometer");
+                cboRightConvOp.Items.Add("cubicmeter");
+                cboRightConvOp.Items.Add("hectoliter");
+                cboRightConvOp.Items.Add("decaliter");
+                cboRightConvOp.Items.Add("liter");
+                cboRightConvOp.Items.Add("deciliter");
+                cboRightConvOp.Items.Add("centiliter");
+                cboRightConvOp.Items.Add("cubiccentimeter");
+                cboRightConvOp.Items.Add("milliliter");
+                cboRightConvOp.Items.Add("cubicmilliliter");
+                cboRightConvOp.Items.Add("microliter");
+                cboRightConvOp.Items.Add("gallon");
+                cboRightConvOp.Items.Add("quart");
+                cboRightConvOp.Items.Add("pint");
+                cboRightConvOp.Items.Add("gill");
+                cboRightConvOp.Items.Add("boardfoot");
+                cboRightConvOp.Items.Add("fluidounce");
+                cboRightConvOp.Items.Add("cup");
+                cboRightConvOp.Items.Add("teaspoon");
+                cboRightConvOp.Items.Add("tablespoon");
+                cboRightConvOp.Items.Add("cubicinch");
+                cboRightConvOp.Items.Add("fluiddram");
+                cboRightConvOp.Items.Add("minim");
+                cboRightConvOp.Items.Add("usbeerkeg");
+                cboRightConvOp.SelectedIndex = 0;
+                txtRightConv.Text = "0";
+            }
+
         }
 
         private void txtLeftConv_TextChanged(object sender, EventArgs e)
@@ -566,6 +651,7 @@ namespace quickcalculator
             double returnNum = 0.0;
             switch(st)
             {
+                //length
                 case "mill":
                     returnNum = CV_mill;
                     break;
@@ -644,6 +730,79 @@ namespace quickcalculator
                     break;
                 case "ton":
                     returnNum = CV_ton;
+                    break;
+                //volume
+                case "cubickilometer":
+                    returnNum = CV_cubickilometer;
+                    break;
+                case "cubicmeter":
+                    returnNum = CV_cubicmeter;
+                    break;
+                case "hectoliter":
+                    returnNum = CV_hectoliter;
+                    break;
+                case "decaliter":
+                    returnNum = CV_decaliter;
+                    break;
+                case "liter":
+                    returnNum = CV_liter;
+                    break;
+                case "deciliter":
+                    returnNum = CV_deciliter;
+                    break;
+                case "centiliter":
+                    returnNum = CV_centiliter;
+                    break;
+                case "cubiccentimeter":
+                    returnNum = CV_cubiccentimeter;
+                    break;
+                case "milliliter":
+                    returnNum = CV_milliliter;
+                    break;
+                case "cubicmilliliter":
+                    returnNum = CV_cubicmilliliter;
+                    break;
+                case "microliter":
+                    returnNum = CV_microliter;
+                    break;
+                case "gallon":
+                    returnNum = CV_gallon;
+                    break;
+                case "quart":
+                    returnNum = CV_quart;
+                    break;
+                case "pint":
+                    returnNum = CV_pint;
+                    break;
+                case "gill":
+                    returnNum = CV_gill;
+                    break;
+                case "boardfoot":
+                    returnNum = CV_boardfoot;
+                    break;
+                case "fluidounce":
+                    returnNum = CV_fluidounce;
+                    break;
+                case "cup":
+                    returnNum = CV_cup;
+                    break;
+                case "teaspoon":
+                    returnNum = CV_teaspoon;
+                    break;
+                case "tablespoon":
+                    returnNum = CV_tablespoon;
+                    break;
+                case "cubicinch":
+                    returnNum = CV_cubicinch;
+                    break;
+                case "fluiddram":
+                    returnNum = CV_fluiddram;
+                    break;
+                case "minim":
+                    returnNum = CV_minim;
+                    break;
+                case "usbeerkeg":
+                    returnNum = CV_usbeerkeg;
                     break;
             }
             return returnNum;

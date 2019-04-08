@@ -13,8 +13,8 @@ using System.Windows.Forms;
 
 /* Quick Calculator - CustomTextBox.cs
  * by Daphne Lundquist
- * 3/30/2019
- * v 1.0.6
+ * 4/7/2019
+ * v 1.0.7
  */
 
 namespace quickcalculator
@@ -65,7 +65,7 @@ namespace quickcalculator
         //constructor
         public CustomTextBox()
         {
-            caret = new Bitmap(10, this.ClientRectangle.Height - 1);
+            caret = new Bitmap(10, this.ClientRectangle.Height); //was Height-1
             FormGraphics = this.CreateGraphics();
             rectBrush = new Rectangle(0, 0, 1, 1);
             startPoint = new Point(0, 0);
@@ -113,7 +113,7 @@ namespace quickcalculator
                 DestroyCaret();
                 //HideCaret(this.Handle);
                 //Bitmap caret = new Bitmap(10, this.ClientRectangle.Height - 1);
-                caret = new Bitmap(10, this.ClientRectangle.Height - 1);
+                caret = new Bitmap(10, this.ClientRectangle.Height); //was Height-1
                 Color clr1 = Color.FromArgb(alphaVal, color1R, color1G, color1B);
                 Color clr2 = Color.FromArgb(alphaVal, color2R, color2G, color2B);
                 using (Graphics g = Graphics.FromImage(caret))
@@ -143,63 +143,8 @@ namespace quickcalculator
                             colorBlend.Positions = relativePositions;
                             pthGrBrush.InterpolationColors = colorBlend;
                             g.FillRectangle(pthGrBrush, 0, 0, caret.Width - 1, caret.Height - 1);
-
-                            /*brush = new LinearGradientBrush(rectBrush, Color.FromArgb(alphaVal, color1R, color1G, color1B), Color.FromArgb(alphaVal, color2R, color2G, color2B), LinearGradientMode.Horizontal);
-                            Blend BlendOptions = new Blend();
-                            BlendOptions.Factors = new float[] { .5f, .85f, 1f, .85f, .50f, .14f, .0f, .14f, .49f };
-                            BlendOptions.Positions = new float[] { 0.0f, .125f, .25f, .375f, .5f, .625f, .75f, .875f, 1.0f };
-                            brush.Blend = BlendOptions;
-                            Pen p = new Pen(brush, 3);
-                            g.SmoothingMode = SmoothingMode.HighQuality;
-                            g.DrawLine(p, new Point(caret.Width / 2, 1), new Point(1, caret.Height - 1));
-                            brush = new LinearGradientBrush(rectBrush, Color.FromArgb(alphaVal, color1R, color1G, color1B), Color.FromArgb(alphaVal, color2R, color2G, color2B), -38);
-                            brush.Blend = BlendOptions;
-                            p = new Pen(brush, 3);
-                            g.DrawLine(p, new Point(1, caret.Height - 1), new Point(caret.Width - 1, caret.Height - 1));
-                            brush = new LinearGradientBrush(rectBrush, Color.FromArgb(alphaVal, color1R, color1G, color1B), Color.FromArgb(alphaVal, color2R, color2G, color2B), 131);
-                            brush.Blend = BlendOptions;
-                            p = new Pen(brush, 3);
-                            g.DrawLine(p, new Point(caret.Width - 1, caret.Height - 1), new Point(caret.Width / 2, 1));*/
                             break;
                     }
-
-                    //draw a triangle
-                    //g.DrawLine(Pens.White, new Point(caret.Width / 2, 1), new Point(1, caret.Height - 1));
-                    //g.DrawLine(Pens.White, new Point(1, caret.Height - 1), new Point(caret.Width - 1, caret.Height - 1));
-                    //g.DrawLine(Pens.White, new Point(caret.Width - 1, caret.Height - 1), new Point(caret.Width / 2, 1));
-
-                    //Graphics FormGraphics = this.CreateGraphics();
-                    //Rectangle rectBrush = new Rectangle(0, 0, 1, 1);
-                    //FormGraphics = this.CreateGraphics();
-                    //rectBrush = new Rectangle(0, 0, 1, 1);
-                    //LinearGradientBrush brush = new LinearGradientBrush(rectBrush, Color.White, Color.Black,LinearGradientMode.Horizontal);
-
-                    //Point startPoint = new Point(0, 0);
-                    //Point endPoint = new Point(20, 20);
-
-                    //LinearGradientBrush brush = new LinearGradientBrush(startPoint, endPoint, Color.FromArgb(alphaVal, color1R, color1G, color1B), Color.FromArgb(alphaVal, color2R, color2G, color2B));
-                    ////brush = new LinearGradientBrush(startPoint, endPoint, Color.FromArgb(alphaVal, color1R, color1G, color1B), Color.FromArgb(alphaVal, color2R, color2G, color2B));
-                    //LinearGradientBrush brush = new LinearGradientBrush(startPoint, endPoint, Color.FromArgb(alphaVal, 255, 0, 0), Color.FromArgb(alphaVal, 255, 255, 0));
-                    ////g.FillRectangle(brush, 0, 0, 20, 30);
-
-                    //blend triangle caret
-                    /*Blend BlendOptions = new Blend();
-                    BlendOptions.Factors = new float[] { .5f, .85f, 1f, .85f, .50f, .14f, .0f, .14f, .49f };
-                    BlendOptions.Positions = new float[] { 0.0f, .125f, .25f, .375f, .5f, .625f, .75f, .875f, 1.0f };
-                    brush.Blend = BlendOptions;
-                    Pen p = new Pen(brush, 3);
-                    g.SmoothingMode = SmoothingMode.HighQuality;
-                    g.DrawLine(p, new Point(caret.Width / 2, 1), new Point(1, caret.Height - 1));
-                    brush = new LinearGradientBrush(rectBrush, Color.White, Color.Black, -38);
-                    brush.Blend = BlendOptions;
-                    p = new Pen(brush, 3);
-                    g.DrawLine(p, new Point(1, caret.Height - 1), new Point(caret.Width - 1, caret.Height - 1));
-                    brush = new LinearGradientBrush(rectBrush, Color.White, Color.Black, 131);
-                    brush.Blend = BlendOptions;
-                    p = new Pen(brush, 3);
-                    g.DrawLine(p, new Point(caret.Width - 1, caret.Height - 1), new Point(caret.Width / 2, 1));
-                    */
-
                     CreateCaret(this.Handle, caret.GetHbitmap(Color.White), cWidth, cHeight);
                     ShowCaret(this.Handle);
                     caret.Dispose();
@@ -233,7 +178,7 @@ namespace quickcalculator
                     //DestroyCaret();
                     //HideCaret(this.Handle);
                     //caret = new Bitmap(10, this.ClientRectangle.Height - 1);
-                    using (caret = new Bitmap(10, this.ClientRectangle.Height - 1))
+                    using (caret = new Bitmap(10, this.ClientRectangle.Height))  //was Height-1
                     {
                         Color clr1 = Color.FromArgb(op, color1R, color1G, color1B);
                         Color clr2 = Color.FromArgb(op, color2R, color2G, color2B);
@@ -264,44 +209,14 @@ namespace quickcalculator
                                     colorBlend.Positions = relativePositions;
                                     pthGrBrush.InterpolationColors = colorBlend;
                                     g.FillRectangle(pthGrBrush, 0, 0, caret.Width - 1, caret.Height - 1);
-
-                                    /*brush = new LinearGradientBrush(rectBrush, Color.FromArgb(op, color1R, color1G, color1B), Color.FromArgb(op, color2R, color2G, color2B), LinearGradientMode.Horizontal);
-                                    Blend BlendOptions = new Blend();
-                                    BlendOptions.Factors = new float[] { .5f, .85f, 1f, .85f, .50f, .14f, .0f, .14f, .49f };
-                                    BlendOptions.Positions = new float[] { 0.0f, .125f, .25f, .375f, .5f, .625f, .75f, .875f, 1.0f };
-                                    brush.Blend = BlendOptions;
-                                    Pen p = new Pen(brush, 3);
-                                    g.SmoothingMode = SmoothingMode.HighQuality;
-                                    g.DrawLine(p, new Point(caret.Width / 2, 1), new Point(1, caret.Height - 1));
-                                    brush = new LinearGradientBrush(rectBrush, Color.FromArgb(op, color1R, color1G, color1B), Color.FromArgb(op, color2R, color2G, color2B), -38);
-                                    brush.Blend = BlendOptions;
-                                    p = new Pen(brush, 3);
-                                    g.DrawLine(p, new Point(1, caret.Height - 1), new Point(caret.Width - 1, caret.Height - 1));
-                                    brush = new LinearGradientBrush(rectBrush, Color.FromArgb(op, color1R, color1G, color1B), Color.FromArgb(op, color2R, color2G, color2B), 131);
-                                    brush.Blend = BlendOptions;
-                                    p = new Pen(brush, 3);
-                                    g.DrawLine(p, new Point(caret.Width - 1, caret.Height - 1), new Point(caret.Width / 2, 1));*/
                                     break;
                             }
-
-                            //FormGraphics = this.CreateGraphics();
-                            //Rectangle rectBrush = new Rectangle(0, 0, 1, 1);
-                            //Point startPoint = new Point(0, 0);
-                            //Point endPoint = new Point(20, 20);
-                            ////brush = new LinearGradientBrush(startPoint, endPoint, Color.FromArgb(op, color1R, color1G, color1B), Color.FromArgb(op, color2R, color2G, color2B));
-                            //brush = new LinearGradientBrush(startPoint, endPoint, Color.FromArgb(op, 255, 0, 0), Color.FromArgb(op, 255, 255, 0));
-                            ////g.FillRectangle(brush, 0, 0, 20, 30);
                             bitmapPtr = caret.GetHbitmap(Color.White);
                             //CreateCaret(this.Handle, caret.GetHbitmap(Color.White), cWidth, cHeight);
                             CreateCaret(this.Handle, bitmapPtr, cWidth, cHeight);
                             ShowCaret(this.Handle);
                             //add bitmapPtr to list  GDI handles to be deleted later  max num of GDI handles in prog. is 10,000 (windows 65,536)
                             bitmapPtrList.Add(bitmapPtr);
-                            //caret.UnlockBits(bp.ToPointer());
-                            //caret.Dispose();
-                            //DestroyCaret();
-                            //Marshal.FreeHGlobal(bp);
-                            //Marshal.FreeCoTaskMem(bp);
                         }                
                     }
                 }
