@@ -12,8 +12,8 @@ using System.Windows.Forms;
 
 /* Quick Calculator
  * by Daphne Lundquist
- * 4/7/2019
- * v 1.0.7
+ * 4/28/2019
+ * v 1.0.8
  */
 
 namespace quickcalculator
@@ -44,12 +44,6 @@ namespace quickcalculator
             //Bitmap bb = gradientTest(btnCFadeFin.ClientRectangle, Color.FromArgb(255, 0, 0, 255), Color.FromArgb(255, 0, 255, 255));
             //btnCFadeFin.BackgroundImage = bb;
 
-            //set Color Wheel initial color of Color.CadetBlue
-            Color cbRGB = Color.CadetBlue;
-            ColorRgb cwRGBInit = new ColorRgb(cbRGB.R, cbRGB.G, cbRGB.B);
-            ColorHsv cwHSVInit = (ColorHsv)cwRGBInit.ToHsv();
-            colorWheelz1.Color = cwHSVInit;
-
             //set initial conversion units
             cboLeftConvOp.SelectedIndex = 2; //inch
             cboRightConvOp.SelectedIndex = 3; //foot
@@ -57,10 +51,66 @@ namespace quickcalculator
 
             this.rbSelRect.Image = this.DrawRBRect(20, 20);
             this.rbSelTriangle.Image = this.DrawRBTriangle(20, 20);
+            this.rbSelQuad.Image = this.DrawRBQuad(20, 20);
 
             //start testForm for debugging
             //testForm tf = new testForm();
             //tf.Show();
+
+            //settings from properties file
+            String cShape = Properties.Settings.Default.cShape;
+            String cColor1 = Properties.Settings.Default.cColor1;
+            String cColor2 = Properties.Settings.Default.cColor2;
+            String resultColor = Properties.Settings.Default.resultColor;
+            int cFade = Properties.Settings.Default.fadeSpeed;
+            //set shape
+                if (cShape.Equals("rect"))
+                {
+                    txtLeftVal.setCaretShape("rect");
+                    txtRightVal.setCaretShape("rect");
+                    txtResult.setCaretShape("rect"); ;
+                    txtExampleTB.setCaretShape("rect");
+                    txtLeftVal.Focus();
+                }
+                if (cShape.Equals("triangle"))
+                {
+                    txtLeftVal.setCaretShape("triangle");
+                    txtRightVal.setCaretShape("triangle");
+                    txtResult.setCaretShape("triangle"); ;
+                    txtExampleTB.setCaretShape("triangle");
+                    txtLeftVal.Focus();
+                }
+                if (cShape.Equals("quad"))
+                {
+                    txtLeftVal.setCaretShape("quad");
+                    txtRightVal.setCaretShape("quad");
+                    txtResult.setCaretShape("quad"); ;
+                    txtExampleTB.setCaretShape("quad");
+                    txtLeftVal.Focus();
+                }
+            //set cColor1
+                String[] ccol1 = cColor1.Split(',');
+                tkColor1R.Value = Int32.Parse(ccol1[0]);
+                tkColor1G.Value = Int32.Parse(ccol1[1]);
+                tkColor1B.Value = Int32.Parse(ccol1[2]);
+            //set cColor2
+                String[] ccol2 = cColor2.Split(',');
+                tkColor2R.Value = Int32.Parse(ccol2[0]);
+                tkColor2G.Value = Int32.Parse(ccol2[1]);
+                tkColor2B.Value = Int32.Parse(ccol2[2]);
+            //set resultColor
+                //set Color Wheel initial color of Color.CadetBlue
+                //Color cbRGB = Color.CadetBlue;  //r:95  g:158  b:160  
+                String[] rcol = resultColor.Split(',');
+                ColorRgb cwRGBInit = new ColorRgb(Int32.Parse(rcol[0]), Int32.Parse(rcol[1]), Int32.Parse(rcol[2]));
+                ColorHsv cwHSVInit = (ColorHsv)cwRGBInit.ToHsv();
+                //ColorRgb cwRGBInit = new ColorRgb(cbRGB.R, cbRGB.G, cbRGB.B);
+                //MessageBox.Show(cbRGB.R + " " + cbRGB.G + " " + cbRGB.B);
+                //ColorHsv cwHSVInit = (ColorHsv)cwRGBInit.ToHsv();
+                colorWheelz1.Color = cwHSVInit;
+            //set fade speed
+                caretFadeAmount = cFade;
+                numCaretFade.Value = cFade;
         }
  /////////////////////////////////////////////////////////////////////////////////////////////////////////
  // Caret Shape Settings
@@ -103,6 +153,25 @@ namespace quickcalculator
             return btmp;
         }
 
+        public Bitmap DrawRBQuad(int wid, int hei)
+        {
+            Bitmap btmp = new Bitmap(wid, hei);
+            using (Graphics g = Graphics.FromImage(btmp))
+            {
+                Point[] points = {
+                    new Point(0, 0),
+                    new Point(wid-5, 4),
+                    new Point(wid-5, hei-4),
+                    new Point(0, hei)};
+
+            using (Pen drpen = new Pen(Color.Blue, 2))
+                {
+                    g.DrawPolygon(drpen, points);
+                }
+            }
+            return btmp;
+        }
+
         private void rbSelRect_CheckedChanged(object sender, EventArgs e)
         {
             if(rbSelRect.Checked)
@@ -113,8 +182,11 @@ namespace quickcalculator
                 txtLeftVal.setCaretShape("rect");
                 txtRightVal.setCaretShape("rect");
                 txtResult.setCaretShape("rect"); ;
-                txtExampleTB.setCaretShape("rect"); 
-                
+                txtExampleTB.setCaretShape("rect");
+
+                //set properties
+                Properties.Settings.Default.cShape = "rect";
+                Properties.Settings.Default.Save();
             }
         }
 
@@ -129,9 +201,32 @@ namespace quickcalculator
                 txtRightVal.setCaretShape("triangle");
                 txtResult.setCaretShape("triangle"); ;
                 txtExampleTB.setCaretShape("triangle");
+
+                //set properties
+                Properties.Settings.Default.cShape = "triangle";
+                Properties.Settings.Default.Save();
             }
         }
- /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private void RbSelQuad_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbSelQuad.Checked)
+            {
+                rbSelQuad.Checked = false;
+                //CustomTextBox currentTxt = GetCurrentTB();
+                //currentTxt.setCaretShape("quad");
+                txtLeftVal.setCaretShape("quad");
+                txtRightVal.setCaretShape("quad");
+                txtResult.setCaretShape("quad"); ;
+                txtExampleTB.setCaretShape("quad");
+
+                //set properties
+                Properties.Settings.Default.cShape = "quad";
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         Bitmap gradientTest(Rectangle r, Color c1, Color c2)
         {
@@ -407,60 +502,17 @@ namespace quickcalculator
         double CV_microliter = 0.00010;
         double CV_gallon = 378.541; //need to further refine US liquid measure constants
         double CV_quart = 94.635; //refine
-        double CV_pint = 47.318; //they come in pints?
-        double CV_gill = 11.829; //refine
+        double CV_pint = 47.31756; //they come in pints? 47.318 
+        double CV_gill = 11.8294; //refine  11.829
         double CV_boardfoot = 2359.737; //refine   
-        double CV_fluidounce = 2.957; //refine
-        double CV_cup = 23.659; //refine
-        double CV_teaspoon = 0.495; //refine
+        double CV_fluidounce = 2.95735; //refine 2.957
+        double CV_cup = 23.65883; //refine 23.659
+        double CV_teaspoon = 0.492892; //refine  0.495
         double CV_tablespoon = 1.478677; //refine
-        double CV_cubicinch = 1.639; //refine
-        double CV_fluiddram = 0.36966; //refine
+        double CV_cubicinch = 1.638705; //refine 1.639
+        double CV_fluiddram = 0.369669; //refine 0.36966
         double CV_minim = 0.00616115; //refine
         double CV_usbeerkeg = 5868.50; //refine
-
-        //concentration solution constants
-        /*double CV_kilogramliter = 1;
-        double CV_gramliter = 0.001;
-        double CV_kilogrammetercubed = 0.001;
-        double CV_gramcubicmeter = 1.0E-6;
-        double CV_microgramcubicmeter = 1.0E-9;
-        double CV_gramcubiccentimeter = 1;
-        double CV_milligramliter = 1.0E-6;
-        double CV_milligrammilliliter = 0.001;
-        double CV_milligramteaspoon= 0.005;
-        double CV_milligramnanoliter = 1;
-        double CV_picogrammilliliter = 1.0E-9;
-        double CV_picogramliter = 1.0E-6;
-        double CV_picogramdeciliter = 1.0E-12;
-        double CV_microgrammilliliter = 1.0E-15;
-        double CV_microgramdeciliter = 1.0E-11;
-        double CV_microgramliter = 1.0E-6;
-        double CV_nanogramliter = 1.0E-8;
-        double CV_nanogramdeciliter = 1.0E-9;
-        double CV_nanogrammilliliter = 1.0E-12;
-        double CV_gramdeciliter = 1.0E-11;
-        double CV_milligramdeciliter = 1.0E-9;
-        double CV_toncubicmeter = 0.01;
-        double CV_poundcubicyard = 1.0E-5;
-        double CV_poundgallonuk = 1;
-        double CV_poundcubicfoot = 0.00059327642110147;
-        double CV_poundgallonus = 0.099776397913856;
-        double CV_ouncecubicinch = 0.01601846336974;
-        double CV_ouncecubicfoot = 0.11982642730074;
-        double CV_ouncecubicyard = 1.7299940439319;
-        double CV_toncubicyard = 0.0010011539606087;
-        double CV_poundcubicinch = 3.7079776318842E-5;
-        double CV_percentage = 1.3078733978551;
-        double CV_partpermillion= 27.67990470291;
-        double CV_partperbillion = 0.01;
-        double CV_partpertrillion = 1.0E-6;
-        double CV_slugcubicfoot = 1.0E-9;
-        double CV_slugcubicinch = 1.0E-15;
-        double CV_slugcubicyard = 0.51537881852553;
-        // = 55.660912400758;
-        // = 0.019088104389835;
-        */
 
         private void computeConversion()
         {
@@ -486,7 +538,9 @@ namespace quickcalculator
                 double unitQuotient = leftUnitVal / rightUnitVal;
 
                 double finalVal = leftConvVal * unitQuotient;
-                txtRightConv.Text = finalVal.ToString();
+                txtRightConv.Text = RoundDoubUp(finalVal).ToString();
+
+                //RoundDoubUp(finalVal);
             }
         }
 
@@ -629,6 +683,42 @@ namespace quickcalculator
                 txtRightConv.Text = "0";
             }
 
+        }
+
+        private double RoundDoubUp(double dRnd)
+        {
+            double roundedDoub = dRnd;
+            String dStr = dRnd.ToString();
+            if (dStr.Contains('.'))
+            {                
+                int decloc = dStr.IndexOf('.');
+                if (dStr.Length > 6)
+                {
+                    //get 4 numbers after the decimal point, if all are 9, then round up the double.
+                    String nines = dStr.Substring(decloc + 1, 4);
+                    if ((nines != null) && (nines.StartsWith("9999")))
+                    {
+                        roundedDoub = Math.Ceiling(dRnd * 100) / 100;
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+            return roundedDoub;
+        }
+
+        public bool IsDouble(string text)
+        {
+            Double num = 0;
+            bool isDouble = false;
+            if (string.IsNullOrEmpty(text))
+            {
+                return false;
+            }
+            isDouble = Double.TryParse(text, out num);
+            return isDouble;
         }
 
         private void txtLeftConv_TextChanged(object sender, EventArgs e)
@@ -916,6 +1006,10 @@ namespace quickcalculator
         private void numCaretFade_ValueChanged(object sender, EventArgs e)
         {
             //txtExampleTB.Focus();
+            int cval = Convert.ToInt32(Math.Round(numCaretFade.Value, 0));
+            //int cval = Int32.Parse(numCaretFade.Value.ToString());
+            Properties.Settings.Default.fadeSpeed = cval;
+            Properties.Settings.Default.Save();
         }
 
         private void btnCaretFadeTest_MouseEnter(object sender, EventArgs e)
@@ -935,6 +1029,11 @@ namespace quickcalculator
             txtResult.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
             txtExampleTB.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
             txtColor1R.Text = tkColor1R.Value.ToString();
+
+            //set properties
+            String col1 = tkColor1R.Value + "," + tkColor1G.Value + "," + tkColor1B.Value;
+            Properties.Settings.Default.cColor1 = col1;
+            Properties.Settings.Default.Save();
         }
 
         private void tkColor1G_ValueChanged(object sender, EventArgs e)
@@ -944,6 +1043,11 @@ namespace quickcalculator
             txtResult.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
             txtExampleTB.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
             txtColor1G.Text = tkColor1G.Value.ToString();
+
+            //set properties
+            String col1 = tkColor1R.Value + "," + tkColor1G.Value + "," + tkColor1B.Value;
+            Properties.Settings.Default.cColor1 = col1;
+            Properties.Settings.Default.Save();
         }
 
         private void tkColor1B_ValueChanged(object sender, EventArgs e)
@@ -953,6 +1057,11 @@ namespace quickcalculator
             txtResult.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
             txtExampleTB.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
             txtColor1B.Text = tkColor1B.Value.ToString();
+
+            //set properties
+            String col1 = tkColor1R.Value + "," + tkColor1G.Value + "," + tkColor1B.Value;
+            Properties.Settings.Default.cColor1 = col1;
+            Properties.Settings.Default.Save();
         }
 
         private void tkColor2R_ValueChanged(object sender, EventArgs e)
@@ -962,6 +1071,11 @@ namespace quickcalculator
             txtResult.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
             txtExampleTB.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
             txtColor2R.Text = tkColor2R.Value.ToString();
+
+            //set properties
+            String col2 = tkColor2R.Value + "," + tkColor2G.Value + "," + tkColor2B.Value;
+            Properties.Settings.Default.cColor2 = col2;
+            Properties.Settings.Default.Save();
         }
 
         private void tkColor2G_ValueChanged(object sender, EventArgs e)
@@ -971,6 +1085,11 @@ namespace quickcalculator
             txtResult.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
             txtExampleTB.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
             txtColor2G.Text = tkColor2G.Value.ToString();
+
+            //set properties
+            String col2 = tkColor2R.Value + "," + tkColor2G.Value + "," + tkColor2B.Value;
+            Properties.Settings.Default.cColor2 = col2;
+            Properties.Settings.Default.Save();
         }
 
         private void tkColor2B_ValueChanged(object sender, EventArgs e)
@@ -980,6 +1099,11 @@ namespace quickcalculator
             txtResult.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
             txtExampleTB.changeColors(tkColor1R.Value, tkColor1G.Value, tkColor1B.Value, tkColor2R.Value, tkColor2G.Value, tkColor2B.Value);
             txtColor2B.Text = tkColor2B.Value.ToString();
+
+            //set properties
+            String col2 = tkColor2R.Value + "," + tkColor2G.Value + "," + tkColor2B.Value;
+            Properties.Settings.Default.cColor2 = col2;
+            Properties.Settings.Default.Save();
         }
 
         private void colorWheelz1_ColorChanged(object sender, EventArgs e)
@@ -987,8 +1111,12 @@ namespace quickcalculator
             Color resultColor = colorWheelz1.Color.ToColor();
             btnResultColor.BackColor = colorWheelz1.Color.ToColor();
             txtResult.BackColor = resultColor;
+
+            String rescol = resultColor.R + "," + resultColor.G + "," + resultColor.B;
+            Properties.Settings.Default.resultColor = rescol;
+            Properties.Settings.Default.Save();
         }
 
-
+     
     }
 }

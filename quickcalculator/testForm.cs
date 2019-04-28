@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -95,6 +96,218 @@ namespace quickcalculator
             }
             return caret;
             //return bitmap;
+        }
+
+        private void TxtConstant1_TextChanged(object sender, EventArgs e)
+        {
+            Double.TryParse(txtLeft.Text, out double leftv);
+            Double.TryParse(txtRight.Text, out double rightv);
+            Double.TryParse(txtConstant1.Text, out double c1);
+            Double.TryParse(txtConstant2.Text, out double c2);
+            double q = c1 / c2;
+            double f = leftv * q;
+            txtConvRes.Text = f.ToString();
+            lblDifference.Text = (Double.Parse(txtExpected.Text) - Double.Parse(txtConvRes.Text)).ToString();
+        }
+
+        private void TxtConstant2_TextChanged(object sender, EventArgs e)
+        {
+            Double.TryParse(txtLeft.Text, out double leftv);
+            Double.TryParse(txtRight.Text, out double rightv);
+            Double.TryParse(txtConstant1.Text, out double c1);
+            Double.TryParse(txtConstant2.Text, out double c2);
+            double q = c1 / c2;
+            double f = leftv * q;
+            txtConvRes.Text = f.ToString();
+            lblDifference.Text = (Double.Parse(txtExpected.Text) - Double.Parse(txtConvRes.Text)).ToString();
+        }
+
+        private void BtnC1Plus1_Click(object sender, EventArgs e)
+        {
+            Double.TryParse(txtConstant1.Text, out double c1);
+            c1 = c1 + 0.1;
+            txtConstant1.Text = c1.ToString();
+            lblDifference.Text = (Double.Parse(txtExpected.Text) - Double.Parse(txtConvRes.Text)).ToString();
+        }
+
+        private void BtnC1Plus2_Click(object sender, EventArgs e)
+        {
+            Double.TryParse(txtConstant1.Text, out double c1);
+            c1 = c1 + 0.01;
+            txtConstant1.Text = c1.ToString();
+            lblDifference.Text = (Double.Parse(txtExpected.Text) - Double.Parse(txtConvRes.Text)).ToString();
+        }
+
+        private void BtnC1Plus3_Click(object sender, EventArgs e)
+        {
+            Double.TryParse(txtConstant1.Text, out double c1);
+            c1 = c1 + 0.001;
+            txtConstant1.Text = c1.ToString();
+            lblDifference.Text = (Double.Parse(txtExpected.Text) - Double.Parse(txtConvRes.Text)).ToString();
+        }
+
+        private void BtnC1Minus1_Click(object sender, EventArgs e)
+        {
+            Double.TryParse(txtConstant1.Text, out double c1);
+            c1 = c1 - 0.1;
+            txtConstant1.Text = c1.ToString();
+            lblDifference.Text = (Double.Parse(txtExpected.Text) - Double.Parse(txtConvRes.Text)).ToString();
+        }
+
+        private void BtnC1Minus2_Click(object sender, EventArgs e)
+        {
+            Double.TryParse(txtConstant1.Text, out double c1);
+            c1 = c1 - 0.01;
+            txtConstant1.Text = c1.ToString();
+            lblDifference.Text = (Double.Parse(txtExpected.Text) - Double.Parse(txtConvRes.Text)).ToString();
+        }
+
+        private void BtnC1Minus3_Click(object sender, EventArgs e)
+        {
+            Double.TryParse(txtConstant1.Text, out double c1);
+            c1 = c1 - 0.001;
+            txtConstant1.Text = c1.ToString();
+            lblDifference.Text = (Double.Parse(txtExpected.Text) - Double.Parse(txtConvRes.Text)).ToString();
+        }
+
+        private void BtnC2Plus1_Click(object sender, EventArgs e)
+        {
+            Double.TryParse(txtConstant2.Text, out double c2);
+            c2 = c2 + 0.1;
+            txtConstant2.Text = c2.ToString();
+            lblDifference.Text = (Double.Parse(txtExpected.Text) - Double.Parse(txtConvRes.Text)).ToString();
+        }
+
+        private void BtnC2Plus2_Click(object sender, EventArgs e)
+        {
+            Double.TryParse(txtConstant2.Text, out double c2);
+            c2 = c2 + 0.01;
+            txtConstant2.Text = c2.ToString();
+            lblDifference.Text = (Double.Parse(txtExpected.Text) - Double.Parse(txtConvRes.Text)).ToString();
+        }
+
+        private void BtnC2Plus3_Click(object sender, EventArgs e)
+        {
+            Double.TryParse(txtConstant2.Text, out double c2);
+            c2 = c2 + 0.001;
+            txtConstant2.Text = c2.ToString();
+            lblDifference.Text = (Double.Parse(txtExpected.Text) - Double.Parse(txtConvRes.Text)).ToString();
+        }
+
+        private void BtnC2Minus1_Click(object sender, EventArgs e)
+        {
+            Double.TryParse(txtConstant2.Text, out double c2);
+            c2 = c2 - 0.1;
+            txtConstant2.Text = c2.ToString();
+            lblDifference.Text = (Double.Parse(txtExpected.Text) - Double.Parse(txtConvRes.Text)).ToString();
+        }
+
+        private void BtnC2Minus2_Click(object sender, EventArgs e)
+        {
+            Double.TryParse(txtConstant2.Text, out double c2);
+            c2 = c2 - 0.01;
+            txtConstant2.Text = c2.ToString();
+            lblDifference.Text = (Double.Parse(txtExpected.Text) - Double.Parse(txtConvRes.Text)).ToString();
+        }
+
+        private void BtnC2Minus3_Click(object sender, EventArgs e)
+        {
+            Double.TryParse(txtConstant2.Text, out double c2);
+            c2 = c2 - 0.001;
+            txtConstant2.Text = c2.ToString();
+            lblDifference.Text = (Double.Parse(txtExpected.Text) - Double.Parse(txtConvRes.Text)).ToString();
+        }
+
+        private void BtnC1Plus4_Click(object sender, EventArgs e)
+        {
+            Double.TryParse(txtConstant1.Text, out double c1);
+            c1 = c1 + 0.0001;
+            txtConstant1.Text = c1.ToString();
+            lblDifference.Text = (Double.Parse(txtExpected.Text) - Double.Parse(txtConvRes.Text)).ToString();
+        }
+
+        private void BtnC1Minus4_Click(object sender, EventArgs e)
+        {
+            Double.TryParse(txtConstant1.Text, out double c1);
+            c1 = c1 - 0.0001;
+            txtConstant1.Text = c1.ToString();
+            lblDifference.Text = (Double.Parse(txtExpected.Text) - Double.Parse(txtConvRes.Text)).ToString();
+        }
+
+        private void BtnC2Plus4_Click(object sender, EventArgs e)
+        {
+            Double.TryParse(txtConstant2.Text, out double c2);
+            c2 = c2 + 0.0001;
+            txtConstant2.Text = c2.ToString();
+            lblDifference.Text = (Double.Parse(txtExpected.Text) - Double.Parse(txtConvRes.Text)).ToString();
+        }
+
+        private void BtnC2Minus4_Click(object sender, EventArgs e)
+        {
+            Double.TryParse(txtConstant2.Text, out double c2);
+            c2 = c2 - 0.0001;
+            txtConstant2.Text = c2.ToString();
+            lblDifference.Text = (Double.Parse(txtExpected.Text) - Double.Parse(txtConvRes.Text)).ToString();
+        }
+
+        private void BtnC1Plus5_Click(object sender, EventArgs e)
+        {
+            Double.TryParse(txtConstant1.Text, out double c1);
+            c1 = c1 + 0.00001;
+            txtConstant1.Text = c1.ToString();
+            lblDifference.Text = (Double.Parse(txtExpected.Text) - Double.Parse(txtConvRes.Text)).ToString();
+        }
+
+        private void BtnC1Minus5_Click(object sender, EventArgs e)
+        {
+            Double.TryParse(txtConstant1.Text, out double c1);
+            c1 = c1 - 0.00001;
+            txtConstant1.Text = c1.ToString();
+            lblDifference.Text = (Double.Parse(txtExpected.Text) - Double.Parse(txtConvRes.Text)).ToString();
+        }
+
+        private void BtnC2Plus5_Click(object sender, EventArgs e)
+        {
+            Double.TryParse(txtConstant2.Text, out double c2);
+            c2 = c2 + 0.00001;
+            txtConstant2.Text = c2.ToString();
+            lblDifference.Text = (Double.Parse(txtExpected.Text) - Double.Parse(txtConvRes.Text)).ToString();
+        }
+
+        private void BtnC2Minus5_Click(object sender, EventArgs e)
+        {
+            Double.TryParse(txtConstant2.Text, out double c2);
+            c2 = c2 - 0.00001;
+            txtConstant2.Text = c2.ToString();
+            lblDifference.Text = (Double.Parse(txtExpected.Text) - Double.Parse(txtConvRes.Text)).ToString();
+        }
+
+        private void BtnToSciNot_Click(object sender, EventArgs e)
+        {
+            String convnm = txtConvRes.Text;
+            double scinum = double.Parse(convnm);
+            double fscinum = 0.00;
+            double scipow = 3.00;
+            ToScientific(scinum, ref fscinum, ref scipow);
+            txtConvRes.Text = fscinum.ToString();
+        }
+
+        private void BtnToRealNum_Click(object sender, EventArgs e)
+        {
+            String convnm = txtConvRes.Text;
+            Decimal realnum = Decimal.Parse(convnm, NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint);
+            txtConvRes.Text = realnum.ToString();
+        }
+
+        public static void ToScientific(double a, ref double number, ref double pow)
+        {
+            if (a == 0) { number = 0; pow = 0; return; }
+            double b = a > 0 ? a : -a;
+            pow = (int)Math.Log10(b);
+            double k = b / Math.Pow(10, pow);
+            if (k < 1) { pow--; }
+            if (k >= 10) { pow++; }
+            number = a / Math.Pow(10, pow);
         }
     }
 }

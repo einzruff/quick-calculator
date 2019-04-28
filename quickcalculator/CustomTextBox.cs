@@ -13,8 +13,8 @@ using System.Windows.Forms;
 
 /* Quick Calculator - CustomTextBox.cs
  * by Daphne Lundquist
- * 4/7/2019
- * v 1.0.7
+ * 4/28/2019
+ * v 1.0.8
  */
 
 namespace quickcalculator
@@ -59,7 +59,7 @@ namespace quickcalculator
         int color2B;
         ArrayList bitmapPtrList = new ArrayList();
         //List<IntPtr> handlesNp = new List<IntPtr>();
-        String caretShape = "rect";  //can be 'rect', or 'triangle'
+        String caretShape = "rect";  //can be 'rect', 'triangle', or 'quad'
 
 
         //constructor
@@ -102,7 +102,13 @@ namespace quickcalculator
                 caretShape = "triangle";
                 this.Invalidate();
                 this.Focus();
-            } 
+            }
+            if(cShape.Equals("quad"))
+            {   
+                caretShape = "quad";
+                this.Invalidate();
+                this.Focus();
+            }
         }
 
         protected override void OnGotFocus(System.EventArgs e)
@@ -126,23 +132,41 @@ namespace quickcalculator
                             g.FillRectangle(brush, 0, 0, 20, 30);
                             break;
                         case "triangle":
-
-                            Point[] points = {
+                            Point[] tripoints = {
                                 new Point(0, 0),
                                 new Point(caret.Width, caret.Height),
                                 new Point(0, caret.Height)};
-                            PathGradientBrush pthGrBrush = new PathGradientBrush(points);
-                            Color[] colors = {
+                            PathGradientBrush tripthGrBrush = new PathGradientBrush(tripoints);
+                            Color[] tricolors = {
                                 clr1,
                                 clr2 };
-                            float[] relativePositions = {
+                            float[] trirelativePositions = {
                                 0f,       
                                 1.0f};
-                            ColorBlend colorBlend = new ColorBlend();
-                            colorBlend.Colors = colors;
-                            colorBlend.Positions = relativePositions;
-                            pthGrBrush.InterpolationColors = colorBlend;
-                            g.FillRectangle(pthGrBrush, 0, 0, caret.Width - 1, caret.Height - 1);
+                            ColorBlend tricolorBlend = new ColorBlend();
+                            tricolorBlend.Colors = tricolors;
+                            tricolorBlend.Positions = trirelativePositions;
+                            tripthGrBrush.InterpolationColors = tricolorBlend;
+                            g.FillRectangle(tripthGrBrush, 0, 0, caret.Width - 1, caret.Height - 1);
+                            break;
+                        case "quad":
+                            Point[] quadpoints = {
+                                new Point(0, 0),  //left top most
+                                new Point(caret.Width-4, 3), //right top most slightly inside
+                                new Point(caret.Width-4, caret.Height-3), //right bottom most slightly inside
+                                new Point(0, caret.Height)};  //left bottom most
+                            PathGradientBrush quadpthGrBrush = new PathGradientBrush(quadpoints);
+                            Color[] quadcolors = {
+                                clr1,
+                                clr2 };
+                            float[] quadrelativePositions = {
+                                0f,
+                                1.0f};
+                            ColorBlend quadcolorBlend = new ColorBlend();
+                            quadcolorBlend.Colors = quadcolors;
+                            quadcolorBlend.Positions = quadrelativePositions;
+                            quadpthGrBrush.InterpolationColors = quadcolorBlend;
+                            g.FillRectangle(quadpthGrBrush, 0, 0, caret.Width - 1, caret.Height - 1);
                             break;
                     }
                     CreateCaret(this.Handle, caret.GetHbitmap(Color.White), cWidth, cHeight);
@@ -192,7 +216,6 @@ namespace quickcalculator
                                     g.FillRectangle(brush, 0, 0, 20, 30);
                                     break;
                                 case "triangle":
-
                                     Point[] points = {
                                         new Point(0, 0),
                                         new Point(caret.Width, caret.Height),
@@ -209,6 +232,25 @@ namespace quickcalculator
                                     colorBlend.Positions = relativePositions;
                                     pthGrBrush.InterpolationColors = colorBlend;
                                     g.FillRectangle(pthGrBrush, 0, 0, caret.Width - 1, caret.Height - 1);
+                                    break;
+                                case "quad":
+                                    Point[] quadpoints = {
+                                        new Point(0, 0),  //left top most
+                                        new Point(caret.Width-4, 3), //right top most slightly inside
+                                        new Point(caret.Width-4, caret.Height-3), //right bottom most slightly inside
+                                        new Point(0, caret.Height)};  //left bottom most
+                                    PathGradientBrush quadpthGrBrush = new PathGradientBrush(quadpoints);
+                                    Color[] quadcolors = {
+                                        clr1,
+                                        clr2 };
+                                    float[] quadrelativePositions = {
+                                        0f,
+                                        1.0f};
+                                    ColorBlend quadcolorBlend = new ColorBlend();
+                                    quadcolorBlend.Colors = quadcolors;
+                                    quadcolorBlend.Positions = quadrelativePositions;
+                                    quadpthGrBrush.InterpolationColors = quadcolorBlend;
+                                    g.FillRectangle(quadpthGrBrush, 0, 0, caret.Width - 1, caret.Height - 1);
                                     break;
                             }
                             bitmapPtr = caret.GetHbitmap(Color.White);

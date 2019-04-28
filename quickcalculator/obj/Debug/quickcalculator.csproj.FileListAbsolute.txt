@@ -45,5 +45,5 @@ C:\Users\lundq\Desktop\gitfiles\quick-calculator\quickcalculator\bin\Debug\quick
 C:\Users\lundq\Desktop\gitfiles\quick-calculator\quickcalculator\bin\Debug\quickcalculator.pdb
 C:\Users\lundq\Desktop\gitfiles\quick-calculator\quickcalculator\obj\Debug\quickcalculator.exe
 C:\Users\lundq\Desktop\gitfiles\quick-calculator\quickcalculator\obj\Debug\quickcalculator.pdb
-C:\Users\lundq\Desktop\gitfiles\quick-calculator\quickcalculator\obj\Debug\quickcalculator.csprojAssemblyReference.cache
 C:\Users\lundq\Desktop\gitfiles\quick-calculator\quickcalculator\obj\Debug\quickcalculator.testForm.resources
+C:\Users\lundq\Desktop\gitfiles\quick-calculator\quickcalculator\obj\Debug\quickcalculator.csprojAssemblyReference.cache

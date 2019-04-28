@@ -89,6 +89,7 @@
             this.lblVersion = new System.Windows.Forms.Label();
             this.lblSettingsHL = new System.Windows.Forms.Label();
             this.btnSettings = new System.Windows.Forms.Button();
+            this.rbSelQuad = new System.Windows.Forms.RadioButton();
             this.colorWheelz1 = new quickcalculator.ColorWheelz();
             this.txtExampleTB = new quickcalculator.CustomTextBox();
             this.txtResult = new quickcalculator.CustomTextBox();
@@ -488,7 +489,7 @@
             this.pnlSettings.Controls.Add(this.btnCFadeColor1);
             this.pnlSettings.Controls.Add(this.lblVersion);
             this.pnlSettings.Controls.Add(this.lblSettingsHL);
-            this.pnlSettings.Location = new System.Drawing.Point(5, 185);
+            this.pnlSettings.Location = new System.Drawing.Point(3, 65);
             this.pnlSettings.Name = "pnlSettings";
             this.pnlSettings.Size = new System.Drawing.Size(427, 219);
             this.pnlSettings.TabIndex = 23;
@@ -526,6 +527,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.rbSelQuad);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.rbSelTriangle);
             this.groupBox2.Controls.Add(this.rbSelRect);
@@ -568,7 +570,7 @@
             // rbSelTriangle
             // 
             this.rbSelTriangle.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbSelTriangle.Location = new System.Drawing.Point(324, 97);
+            this.rbSelTriangle.Location = new System.Drawing.Point(289, 97);
             this.rbSelTriangle.Name = "rbSelTriangle";
             this.rbSelTriangle.Size = new System.Drawing.Size(44, 40);
             this.rbSelTriangle.TabIndex = 46;
@@ -579,7 +581,7 @@
             // rbSelRect
             // 
             this.rbSelRect.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbSelRect.Location = new System.Drawing.Point(279, 97);
+            this.rbSelRect.Location = new System.Drawing.Point(244, 97);
             this.rbSelRect.Name = "rbSelRect";
             this.rbSelRect.Size = new System.Drawing.Size(44, 40);
             this.rbSelRect.TabIndex = 45;
@@ -796,7 +798,7 @@
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(37, 13);
             this.lblVersion.TabIndex = 26;
-            this.lblVersion.Text = "v1.0.7";
+            this.lblVersion.Text = "v1.0.8";
             // 
             // lblSettingsHL
             // 
@@ -817,6 +819,17 @@
             this.btnSettings.Text = "~";
             this.btnSettings.UseVisualStyleBackColor = true;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            // 
+            // rbSelQuad
+            // 
+            this.rbSelQuad.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbSelQuad.Location = new System.Drawing.Point(334, 97);
+            this.rbSelQuad.Name = "rbSelQuad";
+            this.rbSelQuad.Size = new System.Drawing.Size(44, 40);
+            this.rbSelQuad.TabIndex = 48;
+            this.rbSelQuad.TabStop = true;
+            this.rbSelQuad.UseVisualStyleBackColor = true;
+            this.rbSelQuad.CheckedChanged += new System.EventHandler(this.RbSelQuad_CheckedChanged);
             // 
             // colorWheelz1
             // 
@@ -968,6 +981,7 @@
         private System.Windows.Forms.RadioButton rbSelTriangle;
         private System.Windows.Forms.RadioButton rbSelRect;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.RadioButton rbSelQuad;
     }
 }
 
