@@ -62,6 +62,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.btnResultColor = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rbSelQuad = new System.Windows.Forms.RadioButton();
             this.label6 = new System.Windows.Forms.Label();
             this.rbSelTriangle = new System.Windows.Forms.RadioButton();
             this.rbSelRect = new System.Windows.Forms.RadioButton();
@@ -89,7 +90,6 @@
             this.lblVersion = new System.Windows.Forms.Label();
             this.lblSettingsHL = new System.Windows.Forms.Label();
             this.btnSettings = new System.Windows.Forms.Button();
-            this.rbSelQuad = new System.Windows.Forms.RadioButton();
             this.colorWheelz1 = new quickcalculator.ColorWheelz();
             this.txtExampleTB = new quickcalculator.CustomTextBox();
             this.txtResult = new quickcalculator.CustomTextBox();
@@ -350,7 +350,8 @@
             this.cboConversionType.Items.AddRange(new object[] {
             "Length",
             "Mass",
-            "Volume"});
+            "Volume",
+            "Data"});
             this.cboConversionType.Location = new System.Drawing.Point(6, 5);
             this.cboConversionType.Name = "cboConversionType";
             this.cboConversionType.Size = new System.Drawing.Size(144, 21);
@@ -382,6 +383,7 @@
             "meter",
             "kilometer",
             "lightyear",
+            "parsec",
             "lightday",
             "lighthour",
             "lightminute",
@@ -428,6 +430,7 @@
             "meter",
             "kilometer",
             "lightyear",
+            "parsec",
             "lightday",
             "lighthour",
             "lightminute",
@@ -446,6 +449,7 @@
             this.txtRightConv.Name = "txtRightConv";
             this.txtRightConv.Size = new System.Drawing.Size(238, 32);
             this.txtRightConv.TabIndex = 23;
+            this.txtRightConv.TextChanged += new System.EventHandler(this.TxtRightConv_TextChanged);
             // 
             // txtLeftConv
             // 
@@ -489,7 +493,7 @@
             this.pnlSettings.Controls.Add(this.btnCFadeColor1);
             this.pnlSettings.Controls.Add(this.lblVersion);
             this.pnlSettings.Controls.Add(this.lblSettingsHL);
-            this.pnlSettings.Location = new System.Drawing.Point(3, 65);
+            this.pnlSettings.Location = new System.Drawing.Point(5, 176);
             this.pnlSettings.Name = "pnlSettings";
             this.pnlSettings.Size = new System.Drawing.Size(427, 219);
             this.pnlSettings.TabIndex = 23;
@@ -557,6 +561,17 @@
             this.groupBox2.TabIndex = 44;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Caret";
+            // 
+            // rbSelQuad
+            // 
+            this.rbSelQuad.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbSelQuad.Location = new System.Drawing.Point(334, 97);
+            this.rbSelQuad.Name = "rbSelQuad";
+            this.rbSelQuad.Size = new System.Drawing.Size(44, 40);
+            this.rbSelQuad.TabIndex = 48;
+            this.rbSelQuad.TabStop = true;
+            this.rbSelQuad.UseVisualStyleBackColor = true;
+            this.rbSelQuad.CheckedChanged += new System.EventHandler(this.RbSelQuad_CheckedChanged);
             // 
             // label6
             // 
@@ -798,7 +813,7 @@
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(37, 13);
             this.lblVersion.TabIndex = 26;
-            this.lblVersion.Text = "v1.0.8";
+            this.lblVersion.Text = "v1.0.9";
             // 
             // lblSettingsHL
             // 
@@ -819,17 +834,6 @@
             this.btnSettings.Text = "~";
             this.btnSettings.UseVisualStyleBackColor = true;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
-            // 
-            // rbSelQuad
-            // 
-            this.rbSelQuad.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbSelQuad.Location = new System.Drawing.Point(334, 97);
-            this.rbSelQuad.Name = "rbSelQuad";
-            this.rbSelQuad.Size = new System.Drawing.Size(44, 40);
-            this.rbSelQuad.TabIndex = 48;
-            this.rbSelQuad.TabStop = true;
-            this.rbSelQuad.UseVisualStyleBackColor = true;
-            this.rbSelQuad.CheckedChanged += new System.EventHandler(this.RbSelQuad_CheckedChanged);
             // 
             // colorWheelz1
             // 

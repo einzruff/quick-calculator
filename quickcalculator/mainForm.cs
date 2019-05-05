@@ -12,8 +12,8 @@ using System.Windows.Forms;
 
 /* Quick Calculator
  * by Daphne Lundquist
- * 4/28/2019
- * v 1.0.8
+ * 5/4/2019
+ * v 1.0.9
  */
 
 namespace quickcalculator
@@ -473,6 +473,7 @@ namespace quickcalculator
         double CV_meter = 1.0;
         double CV_kilometer = 1000.0;
         double CV_lightyear = 9460730472580800.0;
+        double CV_parsec = 30856775815580800.0;
         double CV_lightday = 25902068371200.0;
         double CV_lighthour = 1079252848800.0;
         double CV_lightminute = 17987547480.0;
@@ -488,7 +489,7 @@ namespace quickcalculator
         double CV_pound = 453.59237;
         double CV_ton = 907200.0;
 
-        //volume
+        //volume constants
         double CV_cubickilometer = 100000000000000;
         double CV_cubicmeter = 100000;
         double CV_hectoliter = 10000;
@@ -514,13 +515,25 @@ namespace quickcalculator
         double CV_minim = 0.00616115; //refine
         double CV_usbeerkeg = 5868.50; //refine
 
+        //data constants
+        double CV_yottabyte = 1000000000000000000000000.0;
+        double CV_zettabyte = 1000000000000000000000.0;
+        double CV_exabyte = 1000000000000000000.0;
+        double CV_petabyte = 1000000000000000.0;
+        double CV_terabyte = 1000000000000.0;
+        double CV_gigabyte = 1000000000.0;
+        double CV_megabyte = 1000000.0;
+        double CV_kilobyte = 1000.0;
+        double CV_byte = 1.0;
+        double CV_bit = 0.125;
+
+
         private void computeConversion()
         {
             if ((cboLeftConvOp.SelectedItem != null) && (cboRightConvOp.SelectedItem != null))
             {
                 //   Length   Mass   Volume
                 String convType = cboConversionType.SelectedText;
-
 
                 //get left val
                 bool leftConv = double.TryParse(txtLeftConv.Text, out double leftConvVal);
@@ -565,6 +578,7 @@ namespace quickcalculator
                 cboLeftConvOp.Items.Add("meter");
                 cboLeftConvOp.Items.Add("kilometer");
                 cboLeftConvOp.Items.Add("lightyear");
+                cboLeftConvOp.Items.Add("parsec");
                 cboLeftConvOp.Items.Add("lightday");
                 cboLeftConvOp.Items.Add("lighthour");
                 cboLeftConvOp.Items.Add("lightminute");
@@ -587,6 +601,7 @@ namespace quickcalculator
                 cboRightConvOp.Items.Add("meter");
                 cboRightConvOp.Items.Add("kilometer");
                 cboRightConvOp.Items.Add("lightyear");
+                cboRightConvOp.Items.Add("parsec");
                 cboRightConvOp.Items.Add("lightday");
                 cboRightConvOp.Items.Add("lighthour");
                 cboRightConvOp.Items.Add("lightminute");
@@ -683,6 +698,80 @@ namespace quickcalculator
                 txtRightConv.Text = "0";
             }
 
+            if (convType.Equals("Data"))
+            {
+                cboLeftConvOp.Items.Clear();
+                cboLeftConvOp.Items.Add("");
+                cboLeftConvOp.Items.Add("bit");
+                cboLeftConvOp.Items.Add("byte");
+                cboLeftConvOp.Items.Add("kilobyte");
+                cboLeftConvOp.Items.Add("megabyte");
+                cboLeftConvOp.Items.Add("gigabyte");
+                cboLeftConvOp.Items.Add("terabyte");
+                cboLeftConvOp.Items.Add("petabyte");
+                cboLeftConvOp.Items.Add("exabyte");
+                cboLeftConvOp.Items.Add("zettabyte");
+                cboLeftConvOp.Items.Add("yottabyte");
+                cboLeftConvOp.SelectedIndex = 0;
+                txtLeftConv.Text = "0";
+                cboRightConvOp.Items.Clear();
+                cboRightConvOp.Items.Add("");
+                cboRightConvOp.Items.Add("bit");
+                cboRightConvOp.Items.Add("byte");
+                cboRightConvOp.Items.Add("kilobyte");
+                cboRightConvOp.Items.Add("megabyte");
+                cboRightConvOp.Items.Add("gigabyte");
+                cboRightConvOp.Items.Add("terabyte");
+                cboRightConvOp.Items.Add("petabyte");
+                cboRightConvOp.Items.Add("exabyte");
+                cboRightConvOp.Items.Add("zettabyte");
+                cboRightConvOp.Items.Add("yottabyte");
+                cboRightConvOp.SelectedIndex = 0;
+                txtRightConv.Text = "0";
+            }
+        }
+
+        private String CommaString(String inStr)
+        {
+            String commaStr = inStr;
+            /*
+            //get string to left of .
+            int perloc = commaStr.IndexOf('.');
+            if (commaStr.Contains('.'))
+            {
+
+            }
+            else
+            {
+                perloc = 0;
+            }
+                //int perloc = commaStr.IndexOf('.');
+                String leftSide = commaStr.Substring(0, commaStr.Length - perloc);
+                int leftlen = leftSide.Length;
+                if (leftlen > 3)
+                {
+                    commaStr = commaStr.Insert(leftSide.Length - 3, ",");
+                }
+                if (leftlen > 6)
+                {
+                    commaStr = commaStr.Insert(leftSide.Length - 6, ",");
+                }
+                if (leftlen > 9)
+                {
+                    commaStr = commaStr.Insert(leftSide.Length - 9, ",");
+                }
+                if (leftlen > 12)
+                {
+                    commaStr = commaStr.Insert(leftSide.Length - 12, ",");
+                }
+            */
+            return commaStr;
+        }
+
+        private void TxtRightConv_TextChanged(object sender, EventArgs e)
+        {
+            //String newText = CommaString(txtRightConv.Text);
+            //txtRightConv.Text = newText;
         }
 
         private double RoundDoubUp(double dRnd)
@@ -694,15 +783,23 @@ namespace quickcalculator
                 int decloc = dStr.IndexOf('.');
                 if (dStr.Length > 6)
                 {
-                    //get 4 numbers after the decimal point, if all are 9, then round up the double.
-                    String nines = dStr.Substring(decloc + 1, 4);
-                    if ((nines != null) && (nines.StartsWith("9999")))
+                    //count number of chars after . (if < 4, no go)
+                    if (dStr.Length - decloc < 4)
                     {
-                        roundedDoub = Math.Ceiling(dRnd * 100) / 100;
+
                     }
                     else
                     {
+                        //get 4 numbers after the decimal point, if all are 9, then round up the double.
+                        String nines = dStr.Substring(decloc + 1, 4);
+                        if ((nines != null) && (nines.StartsWith("9999")))
+                        {
+                            roundedDoub = Math.Ceiling(dRnd * 100) / 100;
+                        }
+                        else
+                        {
 
+                        }
                     }
                 }
             }
@@ -783,6 +880,9 @@ namespace quickcalculator
                     break;
                 case "lightyear":
                     returnNum = CV_lightyear;
+                    break;
+                case "parsec":
+                    returnNum = CV_parsec;
                     break;
                 case "lightday":
                     returnNum = CV_lightday;
@@ -893,6 +993,37 @@ namespace quickcalculator
                     break;
                 case "usbeerkeg":
                     returnNum = CV_usbeerkeg;
+                    break;
+                //data
+                case "bit":
+                    returnNum = CV_bit;
+                    break;
+                case "byte":
+                    returnNum = CV_byte;
+                    break;
+                case "kilobyte":
+                    returnNum = CV_kilobyte;
+                    break;
+                case "megabyte":
+                    returnNum = CV_megabyte;
+                    break;
+                case "gigabyte":
+                    returnNum = CV_gigabyte;
+                    break;
+                case "terabyte":
+                    returnNum = CV_terabyte;
+                    break;
+                case "petabyte":
+                    returnNum = CV_petabyte;
+                    break;
+                case "exabyte":
+                    returnNum = CV_exabyte;
+                    break;
+                case "zettabyte":
+                    returnNum = CV_zettabyte;
+                    break;
+                case "yottabyte":
+                    returnNum = CV_yottabyte;
                     break;
             }
             return returnNum;
@@ -1117,6 +1248,6 @@ namespace quickcalculator
             Properties.Settings.Default.Save();
         }
 
-     
+
     }
 }
